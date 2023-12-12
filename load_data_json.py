@@ -4,7 +4,7 @@ import json
 
 def laad_json_bestand(bestandsnaam):
     #https://saturncloud.io/blog/how-to-convert-nested-json-to-pandas-dataframe-with-specific-format/
-    with open('steam.json') as bestand:
+    with open('json/steam.json') as bestand:
         data = json.load(bestand)
 
     # pd.json_normalize convert the JSON to a DataFrame
