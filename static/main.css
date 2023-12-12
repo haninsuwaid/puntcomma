@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Motiva Sans', sans-serif;
+    color: #c7d5e0;
+    background-color: #1b2838;
+    font-size: 10rem;
+}
