@@ -16,10 +16,16 @@ def laad_json_bestand(bestandsnaam):
     return df
 
 def laad_eerste_game(df):
-    data = df
-    return df.iloc[0,:]#index 0, all columns
     #https://www.statology.org/pandas-select-column-by-index/
+    data = df
+    return data.iloc[0,:]
 
+
+def sorteer_data(data,column,ascending_bool):
+    #https://blog.hubspot.com/website/pandas-sortby#:~:text=Pandas%20Sort%20by%20Column&text=Sorting%20data%20within%20a%20dataframe,the%20values%20in%20descending%20order.
+    sorted_df = data.sort_values(by=(column), ascending=(ascending_bool))
+    return sorted_df
 
 data_list = laad_json_bestand('steam.json')
-(laad_eerste_game(data_list))
+sorted_data = sorteer_data(data_list,'negative_ratings',True)
+print((laad_eerste_game(sorted_data)))
