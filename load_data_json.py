@@ -29,3 +29,5 @@ def sorteer_data(data,column,ascending_bool):
 data_list = laad_json_bestand('steam.json')
 sorted_data = sorteer_data(data_list,'negative_ratings',True)
 print((laad_eerste_game(sorted_data)))
+
+#https://realpython.com/pandas-sort-python/#:~:text=the%20first%20rows.-,Choosing%20a%20Sorting%20Algorithm,quicksort%20%2C%20mergesort%20%2C%20and%20heapsort%20.
