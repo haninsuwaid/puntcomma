@@ -1,23 +1,25 @@
+import pandas as pd
 import json
 
 
 def laad_json_bestand(bestandsnaam):
-    with open((bestandsnaam), 'r') as bestand:
-        gegevens = json.load(bestand)
-        return gegevens#list van dicts
+    #https://saturncloud.io/blog/how-to-convert-nested-json-to-pandas-dataframe-with-specific-format/
+    with open('steam.json') as bestand:
+        data = json.load(bestand)
 
-def laad_eerste_game(list):
-    lijst = list
-    for key, value in lijst[0].items():
-        print(f'Key: {key} Value: {value}')
-    #return lijst[0]
-    #bron: https://github.com/OXKuiper/PROG-demos/blob/master/PROG7.py
+    # pd.json_normalize convert the JSON to a DataFrame
+    df = pd.json_normalize(data,
+                           meta=["appid", "name", "name", "english", "developer", "publisher", "platforms",
+                                 "required_age", "categories", "genres", "steamspy_tags",
+                                 "achievements", "positive_ratings", "negative_ratings", "average_playtime",
+                                 "median_playtime", "owners", "price"])
+    return df
 
-# def sorteer(list):
-#     for key, value in list.items():
-#         if key['positive_ratings'] >......
-#bron: https://canvas.hu.nl/courses/39942/pages/prog7-control-structures-and-dictionaries-uitwerkingen?module_item_id=943900
-#bron: https://discuss.python.org/t/sort-a-list-in-ascending-order-using-loop/31170/2
+def laad_eerste_game(df):
+    data = df
+    return df.iloc[0,:]#index 0, all columns
+    #https://www.statology.org/pandas-select-column-by-index/
+
 
 data_list = laad_json_bestand('steam.json')
 (laad_eerste_game(data_list))
