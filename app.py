@@ -6,12 +6,12 @@ app.register_blueprint(views, url_prefix="/views")
 
 
 @app.route('/')
-def home():  # put application's code here
+def home():
     return render_template('home.html')
 
 
 @app.route('/home')
-def home2():  # put application's code here
+def home2():
     return 'Test'
 
 
