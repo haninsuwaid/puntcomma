@@ -16,7 +16,7 @@
     return:
         De gemiddelde van game review
 """
-def kwantitatief_mediaan_reviews(positieve_reviews, negatieve_reviews):
+def kwantitatief_gemiddelde_reviews(positieve_reviews, negatieve_reviews):
     # return gemiddelde_review
 
 
@@ -42,9 +42,9 @@ def kwatitatief_frequentie_genres(genres):
         parameters:
 
 
-        return:
+        return: frequentie_prijs
     """
 def kwantitatief_frequentie_prijs():
-    # return gemiddelde_review
+    # return frequentie_prijs
 
 
