@@ -1,0 +1,27 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/main.css') }}">
+    <link href="https://fonts.cdnfonts.com/css/motiva-sans" rel="stylesheet">
+    <title>Groepsproject</title>
+</head>
+
+<body>
+    <header>
+        <ul>
+            <img id="steam_logo" src="static/images/steam_logo.png" alt="Steam Logo">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Game</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Friends</a></li>
+        </ul>
+    </header>
+
+    <h1> De eerste game </h1>
+    <div>
+        <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
+        <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
+        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}<br></p>
+    </div>
+</body>
