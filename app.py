@@ -14,7 +14,8 @@ def home():
     df = laad_json_bestand()
     eerste_game = laad_eerste_game(df)
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data)
+    prijsfrequentie = kwantitatief_frequentie_prijs(df)
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie)
 
 
 if __name__ == '__main__':

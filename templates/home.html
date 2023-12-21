@@ -18,10 +18,21 @@
         </ul>
     </header>
 
-    <h1> De eerste game </h1>
+    <h2> De eerste game </h2>
     <div>
         <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
         <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
-        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}<br></p>
+        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
+    </div>
+
+    <div class="prijs_frequentie">
+        <h2>Prijs opties</h2>
+        <p>Er zijn {{ prijsfrequentie[0] }} games gratis<br></p>
+        <p>Er zijn {{ prijsfrequentie[1] }} games tussen de 5&euro; en 10&euro;<br></p>
+        <p>Er zijn {{ prijsfrequentie[2] }} games tussen de 10&euro; en 30&euro;<br></p>
+        <p>Er zijn {{ prijsfrequentie[3] }} games tussen de 3&euro; en 60&euro;<br></p>
+        <p>Er zijn {{ prijsfrequentie[4] }} games boven de 60&euro;</p>
+
+
     </div>
 </body>
