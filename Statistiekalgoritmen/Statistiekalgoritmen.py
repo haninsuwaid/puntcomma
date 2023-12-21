@@ -6,18 +6,27 @@
 """
 
 
-"""
-    functie beschrijving:
-        De functie gaat de gemiddelde uitrekenen van de reviews van games
 
-    parameters:
-        data: data die mee wordt uitgerekend om de gemiddelde uit te halen.
+def kwantitatief_rapportcijfer_reviews(positive_reviews, negative_reviews):
+    """
+        functie beschrijving:
+            De functie berekend het rapportcijfer per game obv de positieve en negatieve reviews
 
-    return:
-        De gemiddelde van game review
-"""
-def kwantitatief_mediaan_reviews(positieve_reviews, negatieve_reviews):
-    # return gemiddelde_review
+        parameters:
+           positive_reviews: Het aantal positieve beoordelingen.
+           negative_reviews: Het aantal negatieve beoordelingen.
+
+        return:
+            Het rapportcijfer van de reviews per game.
+    """
+    rapportcijfer = (positive_reviews / (positive_reviews + negative_reviews)) * 10 #bijv: 75 / ( 75 + 25) * 10 = 7.5
+    #Kan eventueel ook op een schaal van 5, ipv rapportcijfer aantal sterren.
+
+    return round(rapportcijfer, 1)
+
+print(kwantitatief_gemiddelde_reviews(data_list['positive_ratings'],data_list['negative_ratings']))#data dient nog in variabel gezet te worden
+#functies voor mediaan van alle positieve, negatieve en rapportcijfer kunnen. Tevens kan obv hiervan nog de modus of modi vastgesteld worden
+
 
 
 """
