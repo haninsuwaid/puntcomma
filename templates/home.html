@@ -8,9 +8,20 @@
 </head>
 
 <body>
-    <ul>
-        <img id="steam_logo" src="{{ url_for('static', filename='images/steam_logo.png') }}" alt="Steam Logo">
-    </ul>
+    <header>
+        <ul>
+            <img id="steam_logo" src="static/images/steam_logo.png" alt="Steam Logo">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Game</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Friends</a></li>
+        </ul>
+    </header>
 
-    <p>RUN</p>
+    <h1> De eerste game </h1>
+    <div>
+        <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
+        <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
+        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}<br></p>
+    </div>
 </body>
