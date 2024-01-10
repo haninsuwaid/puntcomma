@@ -13,7 +13,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def laad_json_bestand():
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'steam.json')
@@ -114,9 +115,6 @@ def kwalitatief_frequentie_genres():
 
         return: frequentie_prijs
     """
-def kwantitatief_frequentie_prijs():
-    price_data = laad_json_bestand()
-    prijzen = price_data['price']
 
     free = len([prijs for prijs in prijzen if prijs == 0])
     under_5 = len([prijs for prijs in prijzen if 0.01 <= prijs < 5])
@@ -124,7 +122,23 @@ def kwantitatief_frequentie_prijs():
     between_10_and_30 = len([prijs for prijs in prijzen if 10 <= prijs < 30])
     between_30_and_60 = len([prijs for prijs in prijzen if 30 <= prijs < 60])
     over_60 = len([prijs for prijs in prijzen if prijs > 60])
-    frequentie_prijs = free, under_5, between_5_and_10, between_10_and_30, between_30_and_60, over_60
 
-    return frequentie_prijs
+    prijsfrequentie = {
+        "Gratis": free,
+        "\u20AC0 - \u20AC5": under_5,
+        "\u20AC5 - \u20AC10": between_5_and_10,
+        "\u20AC10 - \u20AC30": between_10_and_30,
+        "\u20AC30 - \u20AC60": between_30_and_60,
+        "Over \u20AC60": over_60
+    }
+    x = np.array(list(prijsfrequentie.keys()))
+    y = np.array(list(prijsfrequentie.values()))
+    plt.bar(x, y)
+    plt.title("Aantal games per prijscategorie")
+    plt.xlabel("Prijscategorieën")
+    plt.ylabel("Aantal games")
 
+    graph_filename = 'static\images\graph_price.png'
+    plt.savefig(graph_filename)
+    plt.close()
+    return graph_filename
