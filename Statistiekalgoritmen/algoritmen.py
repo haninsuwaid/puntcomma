@@ -9,6 +9,10 @@ import pandas as pd
 import json
 import os
 from flask import Flask, render_template
+import numpy as np
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 
 
 def laad_json_bestand():
@@ -51,16 +55,16 @@ def sorteer_data(data, column, ascending_bool):
 
 """
     functie beschrijving:
-        De functie gaat de frequentie berekenen van de genres, om te zien
+        De functie gaat de frequentie berekenen van de top 10 genres, om te zien
         hoevaak elke genre het meest voorkomen in games
 
     parameters:
-        genres: de genres die worden opgehaald.
+        geen
 
     return:
-        De frequentie van elke genre
+        De frequentie van de top 10 genre
 """
-def kwatitatief_frequentie_genres():
+def kwalitatief_frequentie_genres():
     data = laad_json_bestand()
     genres = data['genres']
     lst = []
@@ -70,22 +74,37 @@ def kwatitatief_frequentie_genres():
     flat_list = []
     for sublist in lst:
         flat_list.extend(sublist)
-    frequentie = {}
+    frequentie_genres = {}
     for item in flat_list:
-        if item in frequentie:
-            frequentie[item] += 1
+        if item in frequentie_genres:
+            frequentie_genres[item] += 1
         else:
-            frequentie[item] = 1
-    return frequentie
+            frequentie_genres[item] = 1
 
-genre_frequencies = kwatitatief_frequentie_genres()
-print(genre_frequencies)
-#def kwatitatief_frequentie_genres(genres):
-#return genre_frequentie
+    sorted_items = sorted(frequentie_genres.items(), key=lambda x: x[1], reverse=True)
+    top_10 = dict(sorted_items[:10])
+
+    game_genre = list(top_10.keys())
+    values = list(top_10.values())
+
+    fig = plt.figure(figsize=(10, 10))
+    plt.figure(facecolor='#1b2838')
+    plt.barh(game_genre, values, color='#354f52', height=0.7)
+    plt.yticks(color="white")
+    plt.xticks(color="white")
 
 
-def kwantitatief_frequentie_prijs(df):
-    """
+    plt.xlabel("Aantal games", color='white')
+    plt.ylabel("Genres", color='white')
+    plt.title("Hoevaak games voorkomen in elke genre", color='white')
+    # plt.show()
+    file_path = 'static\images\graph_genre.png'
+    plt.savefig(file_path)
+    plt.close()
+    return file_path
+
+
+"""
         functie beschrijving:
             De functie gaat de frequentie berekenen van de prijzen van de games, om te zien
             hoevaak elke prijcategorie voorkomt op de steam applicatie
@@ -95,13 +114,17 @@ def kwantitatief_frequentie_prijs(df):
 
         return: frequentie_prijs
     """
+def kwantitatief_frequentie_prijs():
+    price_data = laad_json_bestand()
+    prijzen = price_data['price']
 
-    free = len(df[df["price"] == 0])
-    under_5 = len(df[(df["price"] >= 0.01) & (df["price"] < 5)])
-    between_5_and_10 = len(df[(df["price"] >= 5) & (df["price"] < 10)])
-    between_10_and_30 = len(df[(df["price"] >= 10) & (df["price"] < 30)])
-    between_30_and_60 = len(df[(df["price"] >= 30) & (df["price"] < 60)])
-    over_60 = len(df[df["price"] > 60])
+    free = len([prijs for prijs in prijzen if prijs == 0])
+    under_5 = len([prijs for prijs in prijzen if 0.01 <= prijs < 5])
+    between_5_and_10 = len([prijs for prijs in prijzen if 5 <= prijs < 10])
+    between_10_and_30 = len([prijs for prijs in prijzen if 10 <= prijs < 30])
+    between_30_and_60 = len([prijs for prijs in prijzen if 30 <= prijs < 60])
+    over_60 = len([prijs for prijs in prijzen if prijs > 60])
     frequentie_prijs = free, under_5, between_5_and_10, between_10_and_30, between_30_and_60, over_60
 
     return frequentie_prijs
+
