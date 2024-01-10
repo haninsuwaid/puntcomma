@@ -10,8 +10,9 @@ import json
 import os
 from flask import Flask, render_template
 
-json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'steam.json')
+
 def laad_json_bestand():
+    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'steam.json')
     with open(json_path) as bestand:
         data = json.load(bestand)
 
@@ -59,9 +60,28 @@ def sorteer_data(data, column, ascending_bool):
     return:
         De frequentie van elke genre
 """
+def kwatitatief_frequentie_genres():
+    data = laad_json_bestand()
+    genres = data['genres']
+    lst = []
+    for gen in genres:
+        genre = gen.split(';')
+        lst.append(genre)
+    flat_list = []
+    for sublist in lst:
+        flat_list.extend(sublist)
+    frequentie = {}
+    for item in flat_list:
+        if item in frequentie:
+            frequentie[item] += 1
+        else:
+            frequentie[item] = 1
+    return frequentie
+
+genre_frequencies = kwatitatief_frequentie_genres()
+print(genre_frequencies)
 #def kwatitatief_frequentie_genres(genres):
 #return genre_frequentie
-
 
 """
     functie beschrijving:
