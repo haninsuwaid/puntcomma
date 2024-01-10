@@ -83,15 +83,25 @@ print(genre_frequencies)
 #def kwatitatief_frequentie_genres(genres):
 #return genre_frequentie
 
-"""
-    functie beschrijving:
 
+def kwantitatief_frequentie_prijs(df):
+    """
+        functie beschrijving:
+            De functie gaat de frequentie berekenen van de prijzen van de games, om te zien
+            hoevaak elke prijcategorie voorkomt op de steam applicatie
 
-    parameters:
+        parameters:
+            df: de functie die de data van het json bestand opent en inlaadt
 
+        return: frequentie_prijs
+    """
 
-    return: frequentie_prijs
-"""
-# def kwantitatief_frequentie_prijs():
+    free = len(df[df["price"] == 0])
+    under_5 = len(df[(df["price"] >= 0.01) & (df["price"] < 5)])
+    between_5_and_10 = len(df[(df["price"] >= 5) & (df["price"] < 10)])
+    between_10_and_30 = len(df[(df["price"] >= 10) & (df["price"] < 30)])
+    between_30_and_60 = len(df[(df["price"] >= 30) & (df["price"] < 60)])
+    over_60 = len(df[df["price"] > 60])
+    frequentie_prijs = free, under_5, between_5_and_10, between_10_and_30, between_30_and_60, over_60
 
-    #return frequentie_prijs
+    return frequentie_prijs
