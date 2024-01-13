@@ -9,22 +9,31 @@
 
 <body>
     <header>
-        <ul>
-            <img id="steam_logo" src="static/images/steam_logo.png" alt="Steam Logo">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Game</a></li>
-            <li><a href="#">Stats</a></li>
-            <li><a href="#">Friends</a></li>
-        </ul>
+        <nav class="header">
+            <img class="logo" src="static/images/steam_logo.png" alt="Steam Logo">
+            <input type="checkbox" id="chk">
+
+            <label for="chk" class="menubutton">
+                <i class="fas fa-ellipsis-h"></i>
+                &#9776
+            </label>
+            <ul class="menu">
+                <a href="#">Dashboard</a>
+                <a href="#">Game</a>
+                <a href="#">Stats</a>
+                <a href="#">Friends</a>
+            </ul>
+        </nav>
     </header>
+    <div id="body">
+        <h2> De eerste game </h2>
+        <div>
+            <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
+            <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
+            <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
+        </div>
 
-    <h2> De eerste game </h2>
-    <div>
-        <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
-        <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
-        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
+        <img src="static/images/graph_price.png" alt="Graph for price categories">
+        <img src="static/images/graph_genre.png" alt="">
     </div>
-
-    <img src="static/images/graph_price.png" alt="Graph for price categories">
-    <img src="static/images/graph_genre.png" alt="">
 </body>
