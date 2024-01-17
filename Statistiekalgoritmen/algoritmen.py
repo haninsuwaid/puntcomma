@@ -134,12 +134,18 @@ def kwantitatief_frequentie_prijs():
         "\u20AC30 - \u20AC60": between_30_and_60,
         "Over \u20AC60": over_60
     }
+
+    fig = plt.figure(figsize=(10, 10))
+    plt.figure(facecolor='#1b2838')
+
     x = np.array(list(prijsfrequentie.keys()))
     y = np.array(list(prijsfrequentie.values()))
-    plt.bar(x, y)
-    plt.title("Aantal games per prijscategorie")
-    plt.xlabel("Prijscategorieën")
-    plt.ylabel("Aantal games")
+    plt.bar(x, y, color='#354f52')
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.title("Aantal games per prijscategorie", color='white')
+    plt.xlabel("Prijscategorieën", color='white')
+    plt.ylabel("Aantal games", color='white')
 
     graph_filename = 'static\images\graph_price.png'
     plt.savefig(graph_filename)
