@@ -1,27 +1,24 @@
 import pandas as pd
 import json
+import os
+import numpy as np
+import matplotlib.pyplot as plt
 
 def laad_json_bestand(bestandsnaam):
     """
         Functie beschrijving:
-            Deze functie laadt JSON-gegevens uit een bestand of een lijst, en converteert deze naar een Pandas DataFrame.
-            Het bestand kan zowel een JSON-bestand als een lijst met JSON-objecten zijn.
+            Deze functie converteert een .json bestand naar een Pandas DataFrame.
 
         Parameters:
-            Bestandsnaam: JSON-bestand of lijst.
+            Bestandsnaam: .json bestand
 
         Return:
             Pandas Dataframe.
 
         Bron:
             - https://saturncloud.io/blog/how-to-convert-nested-json-to-pandas-dataframe-with-specific-format/
-            - https://note.nkmk.me/en/python-type-isinstance/
     """
-
-    if type(bestandsnaam) is list:
-        data = bestandsnaam
-    else:
-        with open((bestandsnaam)) as bestand:
+    with open((bestandsnaam)) as bestand:
             data = json.load(bestand)
 
     #pd.json_normalize convert the JSON to a DataFrame (zie bron)
@@ -76,7 +73,7 @@ def sorteer_data(data,column,ascending_bool,extra_column=None):
 
     return sorted_df
 
-def from_panda_to_json(data,filename):
+def from_pandas_to_json(data,filename):
     """
         Functie beschrijving:
             Deze functie maakt van een Pandas Dataframe een lijst met dictionaries en
@@ -92,6 +89,7 @@ def from_panda_to_json(data,filename):
         Bron:
             - https://datatofish.com/export-pandas-dataframe-json/
     """
+    json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','puntcomma', 'json', filename))
     json_list = data.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
-    with open(f'/Users/beaugunther/PycharmProjects/puntcomma/json/{filename}', 'w') as bestand:
+    with open(f'{json_path}', 'x') as bestand:
         json.dump(json_list, bestand, indent=4)
