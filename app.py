@@ -22,10 +22,13 @@ def laad_eerste_game(df):
     data = df
     return data.iloc[0, :]
 
+
+
 @app.route('/')
 def home():
     df = laad_json_bestand()
     eerste_game = laad_eerste_game(df)
+
     return render_template('home.html', eerste_game=eerste_game)
 
 if __name__ == '__main__':

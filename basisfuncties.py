@@ -21,7 +21,7 @@ def laad_json_bestand(bestandsnaam):
     if type(bestandsnaam) is list:
         data = bestandsnaam
     else:
-        with open('steam.json') as bestand:
+        with open((bestandsnaam)) as bestand:
             data = json.load(bestand)
 
     #pd.json_normalize convert the JSON to a DataFrame (zie bron)
@@ -75,3 +75,23 @@ def sorteer_data(data,column,ascending_bool,extra_column=None):
         sorted_df = data.sort_values(by=(column), ascending=(ascending_bool))
 
     return sorted_df
+
+def from_panda_to_json(data,filename):
+    """
+        Functie beschrijving:
+            Deze functie maakt van een Pandas Dataframe een lijst met dictionaries en
+            schrijft deze vervolgens weg naar een .json bestand.
+
+        Parameters:
+            - Data: Pandas Dataframe.
+            - filename: Naam waarnaar het bestand genoemd dient te worden.
+
+        Return:
+            .json bestand
+
+        Bron:
+            - https://datatofish.com/export-pandas-dataframe-json/
+    """
+    json_list = data.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
+    with open(f'/Users/beaugunther/PycharmProjects/puntcomma/json/{filename}', 'w') as bestand:
+        json.dump(json_list, bestand, indent=4)
