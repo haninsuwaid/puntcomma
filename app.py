@@ -16,7 +16,11 @@ def home():
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image)
+    return render_template('home.html',eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image)
+
+@app.route('/profile/')
+def profile():
+    return render_template('profile.html')
 
 
 if __name__ == '__main__':
