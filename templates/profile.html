@@ -1,5 +1,11 @@
 {% include 'header.html' %}
- <main id="body">
-
+<main id="body">
+    <div>
+        <a href="{{ user_profile['avatarlink'] }}" target="_blank"><img src="{{ user_profile['avatarfull'] }}" alt="Avatar"></a>
+        <p><strong>Real name:</strong> {{user_profile["realname"]}} <br></p>
+        <p><strong>Persona name:</strong> {{user_profile["personaname"]}} <br></p>
+        <p><strong>Profiel URL:</strong> <a href="{{ user_profile['profileurl'] }}" target="_blank" >My Steam profile</a><br></p>
+        <p><strong>Country code:</strong> {{user_profile["loccountrycode"]}} <br></p>
+    </div>
 </main>
 {% include 'footer.html' %}

@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from Statistiekalgoritmen.algoritmen import *
+from Statistiekalgoritmen.apiJson import *
 from views import views
 import pandas as pd
 import json
@@ -20,7 +21,8 @@ def home():
 
 @app.route('/profile/')
 def profile():
-    return render_template('profile.html')
+    user_profile = user()
+    return render_template('profile.html', user_profile=user_profile)
 
 
 if __name__ == '__main__':
