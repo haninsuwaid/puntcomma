@@ -169,3 +169,34 @@ def kwantitatief_frequentie_prijs():
     plt.savefig(graph_filename)
     plt.close()
     return graph_filename
+
+def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
+    """
+        functie beschrijving:
+            De functie gaat door gebruik te maken van een linear regression voorspellen hoe vaak games worden gespeeld.
+            Dit word berekend door gebruik te maken van de hoeveelheid achievements,
+            en hoeveel uur een game wordt gespeeld
+
+
+        parameters:
+            num_iterations: De hoeveelheid iteraties het algortime gaat runnen
+            learning_rate: de grootte van de stappen voor de iteratie
+
+        return: a, b
+    """
+    json_data = laad_json_bestand()
+
+    x = json_data['achievements'].tolist()
+    y = json_data['average_playtime'].tolist()
+
+    a = 0
+    b = 0
+    for _ in range(num_iterations):
+        for i in range(len(x)):
+            if 500 > x[i] > 0 and y[i] > 0:
+                error = (a + b * x[i]) - y[i]
+                a = a - error * learning_rate
+                b = b - x[i] * error * learning_rate
+
+    return a, b
+# print(achievement_playtime())
