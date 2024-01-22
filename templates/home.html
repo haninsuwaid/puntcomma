@@ -9,19 +9,60 @@
 
 <body>
     <header>
-        <ul>
-            <img id="steam_logo" src="static/images/steam_logo.png" alt="Steam Logo">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Game</a></li>
-            <li><a href="#">Stats</a></li>
-            <li><a href="#">Friends</a></li>
-        </ul>
-    </header>
+        <nav class="header">
+            <img class="logo" src="static/images/steam_logo.png" alt="Steam Logo">
+            <input type="checkbox" id="chk">
 
-    <h1> De eerste game </h1>
-    <div>
-        <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
-        <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
-        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}<br></p>
-    </div>
+            <label for="chk" class="menubutton">
+                <i class="fas fa-ellipsis-h"></i>
+                &#9776
+            </label>
+            <ul class="menu">
+                <a href="#">Dashboard</a>
+                <a href="#">Game</a>
+                <a href="#">Stats</a>
+                <a href="#">Friends</a>
+            </ul>
+        </nav>
+    </header>
+    <main id="body">
+        <h2> De eerste game </h2>
+        <div>
+            <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>
+            <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>
+            <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
+        </div>
+
+        <img src="static/images/graph_price.png" alt="Graph for price categories">
+        <img src="static/images/graph_genre.png" alt="">
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="primary_links">
+                <div>
+                    <p>© 2024 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.
+                        VAT included in all prices where applicable.
+                    </p>
+                </div>
+                <div>
+                    <li><a href="https://store.steampowered.com/privacy_agreement" target=”_blank”>Privacy Policy</a></li>
+                    <li><a href="https://store.steampowered.com/legal" target=”_blank”>Legal</a></li>
+                    <li><a href="https://store.steampowered.com/subscriber_agreement" target=”_blank”>Steam Subscriber Agreement</a></li>
+                    <li><a href="https://store.steampowered.com/steam_refunds" target=”_blank”>Refunds</a></li>
+                    <li><a href="https://store.steampowered.com/account/cookiepreferences/" target=”_blank”>Cookies</a></li>
+                </div>
+            </div>
+            <div class="secondary_links">
+                <li><a href="https://www.valvesoftware.com/nl/about" target=”_blank”>About Valve</a></li><p> | </p>
+                <li><a href="https://www.valvesoftware.com/nl/" target=”_blank”>Jobs</a></li><p> | </p>
+                <li><a href="https://partner.steamgames.com/" target=”_blank”>Steamworks</a></li><p> | </p>
+                <li><a href="https://partner.steamgames.com/steamdirect/" target=”_blank”>Steam Distribution</a></li><p> | </p>
+                <li><a href="https://help.steampowered.com/en/" target=”_blank”>Support</a></li><p> | </p>
+                <li><a href="https://store.steampowered.com/digitalgiftcards/" target=”_blank”>Gift Cards</a></li><p> | </p>
+                <li><a href="https://www.facebook.com/Steam" target=”_blank”>Facebook</a></li><p> | </p>
+                <li><a href="https://twitter.com/steam" target=”_blank”>Twitter</a></li>
+            </div>
+        </div>
+    </footer>
 </body>
