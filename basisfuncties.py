@@ -4,6 +4,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def laad_json_bestand(bestandsnaam):
     """
         Functie beschrijving:

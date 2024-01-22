@@ -34,7 +34,7 @@ def plot_histogram_rapportcijfers(data):
     plt.figure(figsize=(10, 6))
 
     #Maak Historgram
-    plt.hist(data['cijfer'], bins=20, color='black', alpha=1, edgecolor='grey')
+    plt.hist(data['cijfer'], bins=20, color="dimgrey", alpha=1, edgecolor='black')
 
     #x,y,titelnaam
     plt.xlabel('Rapportcijfer')
