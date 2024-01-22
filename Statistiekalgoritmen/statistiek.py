@@ -31,20 +31,23 @@ def plot_histogram_rapportcijfers(data):
             Histogram.
     """
     #Afmetingen figuur
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 10))
+    plt.figure(facecolor='#1b2838')
 
     #Maak Historgram
-    plt.hist(data['cijfer'], bins=20, color="dimgrey", alpha=1, edgecolor='black')
+    plt.hist(data['cijfer'], bins=20, color='#354f52', alpha=1, edgecolor='white')
+
 
     #x,y,titelnaam
-    plt.xlabel('Rapportcijfer')
-    plt.ylabel('Aantal Games')
-    plt.title('Rapportcijfers')
+    plt.xlabel('Rapportcijfer', color ="white")
+    plt.ylabel('Aantal Games', color="white")
+    plt.title('Rapportcijfers', color="white")
+    plt.yticks(color="white")
+    plt.xticks(color="white")
 
-    plt.xticks(np.arange(0, 10.5, 0.5))
+    plt.xticks(np.arange(0, 10.5))
 
     graph_rapportcijfer = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static','images', 'graph_rapportcijfers'))
-
     plt.savefig(graph_rapportcijfer)
     plt.close()
     return graph_rapportcijfer
@@ -73,15 +76,24 @@ def plot_insight_ratings_per_game(data, game_id):
 
     y = np.array([positief, negatief])
     mylabels = ['Positief', 'Negatief']
-    mycolors = ["dimgrey", "lightgray"]
+    mycolors = ["#354f52", "#1b2838"]
 
-    plt.pie(y, labels=mylabels, colors=mycolors, autopct='%1.1f%%', startangle=90)
+    # Create a figure with a white background
+    fig, ax = plt.subplots(facecolor='#1b2838')
 
-    plt.title(f' {game_data["name"].iloc[0]} (ID: {game_id})\nVerdeling over de totaal gegeven ratings: {totaal_ratings}')
+    ax.pie(y, labels=mylabels, colors=mycolors, autopct='%1.1f%%', startangle=90,textprops={'color':'white'})
 
-    graph_ratings_game = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static','images', f'graph_ratings_{game_id}.png'))
+    plt.title(f'{game_data["name"].iloc[0]} (ID: {game_id})\nVerdeling over de totaal gegeven ratings: {totaal_ratings}', color='white')
+    plt.tight_layout()
+
+    # Save the figure
+    graph_ratings_game = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), '..', 'static', 'images', f'graph_ratings_{game_id}.png'))
     plt.savefig(graph_ratings_game)
+
+    # Close the plot to free up resources
     plt.close()
+
     return graph_ratings_game
 
 
