@@ -39,20 +39,38 @@ def sorteer_data(data, column, ascending_bool):
     return sorted_df
 
 
-"""
-    functie beschrijving:
-        De functie gaat de gemiddelde uitrekenen van de reviews van games
+def kwantitatief_rapportcijfer_reviews(data):
+    data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
+    data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
+    gesorteerde_data = data.sort_values(by='totaal_ratings', ascending=False)
+    top_100 = gesorteerde_data.head(100)
 
-    parameters:
-        data: data die mee wordt uitgerekend om de gemiddelde uit te halen.
+    return top_100
 
-    return:
-        De gemiddelde van game review
-"""
-# def kwantitatief_gemiddelde_reviews(positieve_reviews, negatieve_reviews):
+def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
+    a = 0
+    b = 0
 
-    #return gemiddelde_review
+    for aantal in range(num_iterations):
+        for i in range(len(prijs)):
+            error = (a + b * prijs[i]) - rating[i]
+            a -= error * learning_rate
+            b -= prijs[i] * error * learning_rate
 
+    coefficients = [a, b]
+    nieuwe_prijzen = [0.0, 10, 50]
+    voorspellingen = [coefficients[0] + coefficients[1] * prijs for prijs in nieuwe_prijzen]
+
+    print("Voorspelde cijfers voor nieuwe prijzen:", voorspellingen)
+
+    return coefficients
+
+data = laad_json_bestand()
+top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
+prijs = top_100_meest_gereviewde_games["price"].tolist()
+rating = top_100_meest_gereviewde_games["cijfer"].tolist()
+coefficients = gradient_descent(prijs, rating)
+print("Gevonden coëfficiënten:", coefficients)
 
 """
     functie beschrijving:
