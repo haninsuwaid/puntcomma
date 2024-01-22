@@ -22,8 +22,14 @@ def home():
 @app.route('/profile/')
 def profile():
     user_profile = user()
-    return render_template('profile.html', user_profile=user_profile)
+    owned_games = all_owned_games()
+    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games)
 
+
+@app.route('/owned_games/')
+def owned_games():
+    ownedgames = all_owned_games()
+    return render_template('owned_games.html', ownedgames=ownedgames)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

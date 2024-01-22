@@ -24,10 +24,11 @@ def user():
         real_name = data["realname"]
         loccountry_code = data["loccountrycode"]
     return data
-user()
-def all_games():
+
+
+def all_owned_games():
     games = get_json_api(
-        "https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json", "applist"
+        "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json", "response"
     )
     return games
 
