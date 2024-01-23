@@ -17,7 +17,15 @@ def home():
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
-    return render_template('home.html',eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image)
+    all_steam_game = all_steam_games(limit=5)
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game)
+
+
+@app.route('/game/')
+def game():
+    game_id = steam_game_info('814380')
+    return render_template('game.html', game_id=game_id)
+
 
 @app.route('/profile/')
 def profile():

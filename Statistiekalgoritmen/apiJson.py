@@ -60,3 +60,22 @@ print(lll)
 # owned_games = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json"
 # game_stats = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=HIERGAMENUMMER!&key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436"
 # friends = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&relationship=friend"
+
+
+def all_steam_games(limit=0):
+    games = get_json_api("https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
+
+    if games and "applist" in games:
+        apps = games["applist"]["apps"]
+
+        gamelist = []
+        for app in apps[:limit]:
+            gamelist.append(app["appid"])
+            gamelist.append(app["name"])
+
+        return gamelist
+
+
+def steam_game_info(gameid):
+    game_info = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
+    return game_info
