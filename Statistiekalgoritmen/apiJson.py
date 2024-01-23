@@ -39,22 +39,14 @@ def all_owned_games():
     return appids
 
 
-def owned_games_info():
+def owned_games_info(limit=0):
     all_owned_games_ids = all_owned_games()
-    for index, appid in enumerate(all_owned_games_ids):
+    for index, appid in enumerate(all_owned_games_ids[:limit]):
         game_info = get_json_api(
             f"https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid={appid}&key=B129420016573EE260056E21D4218C90&steamid=76561198366424343",
             "playerstats"
         )
     return game_info
-
-
-
-
-# recently_played = "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json"
-# owned_games = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json"
-# game_stats = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=HIERGAMENUMMER!&key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436"
-# friends = "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&relationship=friend"
 
 
 def all_steam_games(limit=0):
@@ -65,8 +57,9 @@ def all_steam_games(limit=0):
 
         gamelist = []
         for app in apps[:limit]:
-            gamelist.append(app["appid"])
-            gamelist.append(app["name"])
+            if app["name"]:
+                gamelist.append(app["appid"])
+                gamelist.append(app["name"])
 
         return gamelist
 

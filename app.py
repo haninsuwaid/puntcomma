@@ -17,7 +17,7 @@ def home():
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
-    all_steam_game = all_steam_games(limit=5)
+    all_steam_game = all_steam_games(limit=50)
     return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game)
 
 
@@ -30,14 +30,12 @@ def game():
 @app.route('/profile/')
 def profile():
     user_profile = user()
-    # owned_games = all_owned_games()
-    # amount = all_owned_games()
     return render_template('profile.html', user_profile=user_profile)
 
 
 @app.route('/owned_games/')
 def owned_games():
-    owned_games = owned_games_info()
+    owned_games = owned_games_info(limit=20)
     return render_template('owned_games.html', owned_games=owned_games)
 
 if __name__ == '__main__':
