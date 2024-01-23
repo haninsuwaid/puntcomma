@@ -59,9 +59,9 @@ def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
 
     coefficients = [a, b]
     nieuwe_prijzen = [0.0, 10, 50]
-    voorspellingen = [coefficients[0] + coefficients[1] * prijs for prijs in nieuwe_prijzen]
-
-    print("Voorspelde cijfers voor nieuwe prijzen:", voorspellingen)
+    # voorspellingen = [coefficients[0] + coefficients[1] * prijs for prijs in nieuwe_prijzen]
+    #
+    # print("Voorspelde cijfers voor nieuwe prijzen:", voorspellingen)
 
     return coefficients
 
@@ -69,8 +69,8 @@ data = laad_json_bestand()
 top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
 prijs = top_100_meest_gereviewde_games["price"].tolist()
 rating = top_100_meest_gereviewde_games["cijfer"].tolist()
-coefficients = gradient_descent(prijs, rating)
-print("Gevonden coëfficiënten:", coefficients)
+# coefficients = gradient_descent(prijs, rating)
+# print("Gevonden coëfficiënten:", coefficients)
 
 """
     functie beschrijving:
