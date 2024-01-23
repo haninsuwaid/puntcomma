@@ -1,9 +1,7 @@
 {% include 'header.html' %}
 <main id="ownedgames">
     <div>
-        {% for game_info in all_game_info %}
-        <p><strong>Game: </strong> {{ game_info["gameName"] }} <br></p>
-        {% endfor %}
+        <p><strong>Game: </strong> {{owned_games["gameName"]}} <br></p>
     </div>
 </main>
 {% include 'footer.html' %}

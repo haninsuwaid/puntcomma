@@ -41,17 +41,12 @@ def all_owned_games():
 
 def owned_games_info():
     all_owned_games_ids = all_owned_games()
-    all_game_info = []
     for index, appid in enumerate(all_owned_games_ids):
         game_info = get_json_api(
             f"https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid={appid}&key=B129420016573EE260056E21D4218C90&steamid=76561198366424343",
             "playerstats"
         )
-        all_game_info.append(game_info)
-    return all_game_info[:20]
-
-lll = owned_games_info()
-print(lll)
+    return game_info
 
 
 
