@@ -8,6 +8,15 @@
         <p><strong>Country code:</strong> {{user_profile["loccountrycode"]}} <br></p>
         <p><strong>Amount owned games:</strong>  {{owned_games["game_count"]}}</p>
         <a href="{{ url_for('owned_games') }}"><strong>Owned games</strong></a>
+
+        <li>
+            <strong>App ID:</strong> {{ game["appid"] }} <br>
+            <strong>Playtime Forever:</strong> {{ game.playtime_forever }} minutes
+        </li>
+
+
+
+
     </div>
 </main>
 {% include 'footer.html' %}
