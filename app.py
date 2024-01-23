@@ -29,8 +29,8 @@ def profile():
 
 @app.route('/owned_games/')
 def owned_games():
-    owned_games = owned_games_info()
-    return render_template('owned_games.html', owned_games=owned_games)
+    all_game_info = owned_games_info()
+    return render_template('owned_games.html', all_game_info=all_game_info)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
