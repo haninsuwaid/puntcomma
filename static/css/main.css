@@ -56,6 +56,11 @@ label {
     z-index: -1111;
 }
 
+#profile{
+    display: flex;
+    justify-content: flex-start;
+}
+
 @media only screen and (min-width: 1024.1px) {
 
     .header {
