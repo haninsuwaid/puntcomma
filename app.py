@@ -30,13 +30,9 @@ def game():
 @app.route('/profile/')
 def profile():
     user_profile = user()
-    return render_template('profile.html', user_profile=user_profile)
-
-
-@app.route('/owned_games/')
-def owned_games():
     owned_games = owned_games_info(limit=20)
-    return render_template('owned_games.html', owned_games=owned_games)
+    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

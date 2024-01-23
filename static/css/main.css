@@ -58,7 +58,7 @@ label {
 
 #profile{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 
 @media only screen and (min-width: 1024.1px) {

@@ -33,21 +33,24 @@ def all_owned_games():
     )
     appids = []
     for owned_games_data in games:
-        appid = owned_games_data["appid"]
-        appids.append(appid)
+        if owned_games_data["playtime_forever"] > 0:
+            appid = owned_games_data["appid"]
+            appids.append(appid)
 
     return appids
 
 
 def owned_games_info(limit=0):
     all_owned_games_ids = all_owned_games()
+    all_game_info = []
     for index, appid in enumerate(all_owned_games_ids[:limit]):
         game_info = get_json_api(
             f"https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid={appid}&key=B129420016573EE260056E21D4218C90&steamid=76561198366424343",
             "playerstats"
         )
-    return game_info
-
+        if "gameName" in game_info and game_info["gameName"]:
+            all_game_info.append(game_info)
+    return all_game_info
 
 def all_steam_games(limit=0):
     games = get_json_api("https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
