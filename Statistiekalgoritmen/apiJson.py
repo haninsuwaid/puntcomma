@@ -28,11 +28,15 @@ def user():
 
 def all_owned_games():
     games = get_json_api(
-        "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json", "response"
+        "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436&format=json", "response", "games"
     )
-    return games
+    for owned_games_data in games:
+        p = owned_games_data["appid"]
+    return owned_games_data
 
+def owned_games_info():
 
+    game_info = get_json_api(f"https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid={appid}!&key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198072948436", "playerstats")
 
 
 
