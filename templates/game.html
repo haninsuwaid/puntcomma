@@ -1,5 +1,13 @@
 {% include 'header.html' %}
+
 <main id="body">
-  {{ game_id }}
+
+    {% for appid, game_data in game.items() %}
+        <p>{{ game_data['data']['name']}}</p>
+    {% endfor %}
+
+
+
 </main>
+
  {% include 'footer.html' %}
