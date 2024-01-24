@@ -243,3 +243,35 @@ footer a:hover {
     display: flex;
     flex-direction: row;
 }
+
+/* Start Landingspage styling */
+
+.background{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('../images/landingspagebc.jpg') center/cover;
+}
+
+input {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0px 10px 0px;
+    border: none;
+    border-radius: 10px;
+    background-color: #444;
+    color: white;
+}
+
+.form{
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+
+/* End Landingspage styling */

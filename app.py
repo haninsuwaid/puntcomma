@@ -11,6 +11,12 @@ app = Flask(__name__, template_folder='templates')
 app.register_blueprint(views, url_prefix="/views")
 
 @app.route('/')
+def landingspage():
+    return render_template('landingspage.html')
+
+
+
+@app.route('/home/')
 def home():
     df = laad_json_bestand()
     eerste_game = laad_eerste_game(df)
