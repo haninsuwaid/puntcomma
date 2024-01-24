@@ -8,10 +8,10 @@
         <p><strong>Country code:</strong> {{user_profile["loccountrycode"]}} <br></p>
         <p><a href="{{ url_for('owned_games') }}"><strong>Owned games</strong></a> {{owned_games["game_count"]}}</p>
     </div>
-    <div id="games_list">
-        <h1>Top played games:</h1>
-        {% for game_info in owned_game_info %}
-        <p>{{ game_info["gameName"] }}<br></p>
+    <div id="friends_list">
+        <h1>5 oldest friends: </h1>
+        {% for friend in friends_list %}
+        <p>{{ friend["realname"] }}<br></p>
         {% endfor %}
     </div>
 </main>
