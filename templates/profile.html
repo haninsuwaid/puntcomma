@@ -9,10 +9,13 @@
         <p><a href="{{ url_for('owned_games') }}"><strong>Owned games</strong></a> {{owned_games["game_count"]}}</p>
     </div>
     <div id="friends_list">
-        <h1>5 oldest friends: </h1>
-        {% for friend in friends_list %}
-        <p>{{ friend["realname"] }}<br></p>
+    <h1>5 oldest friends: </h1>
+    {% for friends_info_list in friend_list_info %}
+        {% for friend_info in friends_info_list %}
+            <p>{{ friend_info["personaname"] }}<br></p>
         {% endfor %}
-    </div>
+    {% endfor %}
+</div>
+
 </main>
 {% include 'footer.html' %}

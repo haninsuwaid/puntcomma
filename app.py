@@ -38,10 +38,8 @@ def game(appid):
 def profile():
     user_profile = user()
     owned_games = amount_owned_games()
-    friend_list = friends_info()
-    owned_game_info = owned_games_info(limit=20)
-    return render_template('profile.html', user_profile=user_profile, owned_game_info=owned_game_info,
-                           owned_games=owned_games, friend_list=friend_list)
+    friend_list_info = friends_list_info(limit=5)
+    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games, friend_list_info=friend_list_info)
 
 
 @app.route('/owned_games/')
