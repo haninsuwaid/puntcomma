@@ -8,11 +8,20 @@
     </div>
 
 
-{% for game in all_steam_game %} <br>
-    <a href="{{ url_for('game', appid=game.appid) }}">
-        Name: {{ game.name }}
-    </a>
-{% endfor %}
+    <div class="slideshow">
+        {% for game_info_item in game_info %}
+            {% for app_id, game_info_data in game_info_item.items() %}
+                {% if game_info_data.success %}
+                    <div class="slideshow_games">
+                        <a href="{{ url_for('game', appid=app_id) }}">
+                            <img src="{{ game_info_data.data.header_image }}">
+                        </a>
+                        <p>{{ game_info_data.data.name }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
 
 <br>
     <img src="static/images/graph_price.png" alt="Graph for price categories">

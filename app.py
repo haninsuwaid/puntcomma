@@ -18,7 +18,8 @@ def home():
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
     all_steam_game = all_steam_games(limit=10)
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game)
+    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game, game_info=game_info)
 
 
 @app.route('/game/<appid>')
