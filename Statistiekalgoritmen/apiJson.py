@@ -89,9 +89,10 @@ def friends_steam_id():
         "friendslist", "friends"
     )
     friend_list_data = []
-    for steamid in friends:
-        friend_steam_id = steamid["steamid"]
-        friend_list_data.append(friend_steam_id)
+    sorted_friends = sorted(friends, key=lambda x: x.get("friend_since"))
+    for friend in sorted_friends[:10]:
+        steam_id = friend["steamid"]
+        friend_list_data.append(steam_id)
     return friend_list_data
 
 
