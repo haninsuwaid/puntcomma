@@ -29,9 +29,8 @@ def game(appid):
 @app.route('/profile/')
 def profile():
     user_profile = user()
-    # owned_games = all_owned_games()
-    # amount = all_owned_games()
-    return render_template('profile.html', user_profile=user_profile)
+    owned_games = owned_games_info(limit=20)
+    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games)
 
 
 @app.route('/owned_games/')
