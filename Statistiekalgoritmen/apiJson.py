@@ -57,7 +57,7 @@ def all_steam_games(limit=0):
     count = 0
     for app in apps:
         if "name" in app and app["name"]:
-            gamelist.append({"appid": app["appid"], "name": app["name"]})
+            gamelist.append({"appid": app["appid"]})
             count += 1
         if count == limit:
             break
