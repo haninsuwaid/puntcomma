@@ -12,6 +12,21 @@
     margin-left: 30px;
 }
 
+.Profile_img img {
+    height: 200px;
+    filter: drop-shadow(#171d25 0.5rem 0.5rem 25px);
+    border-radius: 7px;
+}
+
+.Profile_img{
+    box-sizing: border-box;
+    padding: 5vh;
+}
+
+#games_list{
+    text-align: center;
+}
+
 i {
     position: absolute;
     display: none;
@@ -58,7 +73,11 @@ label {
 
 #profile{
     display: flex;
+    align-content: flex-start;
     justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 7vh;
 }
 
 @media only screen and (min-width: 1024.1px) {

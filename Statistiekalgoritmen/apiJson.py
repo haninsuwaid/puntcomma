@@ -40,6 +40,27 @@ def all_owned_games():
     return appids
 
 
+def all_owned_games():
+    games = get_json_api(
+        "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=B129420016573EE260056E21D4218C90&steamid=76561198366424343&format=json",
+        "response", "games"
+    )
+    appids = []
+    for owned_games_data in games:
+        if owned_games_data["playtime_forever"] > 0:
+            appid = owned_games_data["appid"]
+            appids.append(appid)
+
+    return appids
+
+
+def amount_owned_games():
+    games = get_json_api(
+        "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=B129420016573EE260056E21D4218C90&steamid=76561198366424343&format=json",
+        "response"
+    )
+    return games
+
 def owned_games_info(limit=0):
     all_owned_games_ids = all_owned_games()
     all_game_info = []
@@ -70,3 +91,7 @@ def all_steam_games(limit=0):
 def steam_game_info(gameid):
     game_info = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
     return game_info
+
+def friends_list():
+    friends = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
+    return friends

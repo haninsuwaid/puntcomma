@@ -10,12 +10,11 @@
 
 {% for game in all_steam_game %} <br>
     <a href="{{ url_for('game', appid=game.appid) }}">
-        Name: {{ game.name }}{{ game.appid }}
+        Name: {{ game.name }}
     </a>
 {% endfor %}
 
 <br>
-
     <img src="static/images/graph_price.png" alt="Graph for price categories">
     <img src="static/images/graph_genre.png" alt="">
 </main>
