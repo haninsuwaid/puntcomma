@@ -93,5 +93,5 @@ def steam_game_info(gameid):
     return game_info
 
 def friends_list():
-    friends = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
+    friends = get_json_api("https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid=76561198366424343&relationship=friend", "friendslist", "friends")
     return friends

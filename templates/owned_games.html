@@ -1,9 +1,10 @@
-<!--{% include 'header.html' %}-->
-<!--<main id="ownedgames">-->
-<!--    <div>-->
-<!--       {% for game_info in owned_games %}-->
-<!--        <p><strong>Game: </strong> {{ game_info["gameName"] }} <br></p>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-<!--</main>-->
-<!--{% include 'footer.html' %}-->
+{% include 'header.html' %}
+<main id="profile">
+    <div id="games_list">
+        <h1>Top played games:</h1>
+        {% for game_info in owned_game_info %}
+        <p>{{ game_info["gameName"] }}<br></p>
+        {% endfor %}
+    </div>
+</main>
+{% include 'footer.html' %}
