@@ -6,7 +6,7 @@
         <p><strong>Persona name:</strong> {{user_profile["personaname"]}} <br></p>
         <p><strong>Profiel URL:</strong> <a href="{{ user_profile['profileurl'] }}" target="_blank" >My Steam profile</a><br></p>
         <p><strong>Country code:</strong> {{user_profile["loccountrycode"]}} <br></p>
-        <p><strong>Owned games: </strong> {{owned_games["game_count"]}}</p>
+        <p><a href="{{ url_for('owned_games') }}"><strong>Owned games</strong></a> {{owned_games["game_count"]}}</p>
     </div>
     <div id="games_list">
         <h1>Top played games:</h1>
