@@ -42,10 +42,15 @@ def profile():
     return render_template('profile.html', user_profile=user_profile, owned_games=owned_games, friend_list_info=friend_list_info)
 
 
+@app.route('/stats/')
+def stats():
+    return render_template('stats.html')
+
 @app.route('/owned_games/')
 def owned_games():
     owned_game_info = owned_games_info(limit=20)
     return render_template('owned_games.html', owned_game_info=owned_game_info)
+
 
 
 if __name__ == '__main__':
