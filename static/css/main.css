@@ -239,10 +239,15 @@ footer a:hover {
 }
 /* End for the footer styling */
 
+/* Start Styling for the slideshow */
 .slideshow{
     display: flex;
     flex-direction: row;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
+/* End styling of the slideshow */
 
 /* Start Landingspage styling */
 

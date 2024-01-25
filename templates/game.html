@@ -5,7 +5,9 @@
     {% for appid, game_data in game.items() %}
         <p>{{ game_data['data']['name']}}</p>
         <img src="{{ game_data['data']['header_image'] }}">
-
+        <p>{{ game_data['data']['short_description'] }}</p>
+        <p>{{ game_data['data']['supported_languages'] }}</p>
+    <p>{{ game_data['data']['release_date']['date'] }}</p>
     {% endfor %}
 
 
