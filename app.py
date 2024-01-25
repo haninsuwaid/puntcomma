@@ -59,6 +59,10 @@ def game(appid):
     return render_template('game.html', game=games_data)
 
 
+@app.route('/stats/')
+def stats():
+    return render_template('stats.html')
+
 @app.route('/owned_games/')
 def owned_games():
     appid = request.args.get('appid')
@@ -66,6 +70,7 @@ def owned_games():
     # Assuming steam_game_info is a function that fetches information for a specific game
     game_info = steam_game_info(appid)
     return render_template('owned_games.html',appid=appid, game_info=game_info)
+
 
 
 if __name__ == '__main__':

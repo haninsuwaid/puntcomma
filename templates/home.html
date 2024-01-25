@@ -7,7 +7,6 @@
         <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
     </div>
 
-
     <div class="slideshow">
         {% for game_info_item in game_info %}
             {% for app_id, game_info_data in game_info_item.items() %}
@@ -22,9 +21,5 @@
             {% endfor %}
         {% endfor %}
     </div>
-
-<br>
-    <img src="../static/images/graph_price.png" alt="Graph for price categories">
-    <img src="../static/images/graph_genre.png" alt="">
 </main>
  {% include 'footer.html' %}
