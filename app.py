@@ -1,11 +1,10 @@
 from flask import Flask, render_template
 from Statistiekalgoritmen.algoritmen import *
-from basisfuncties import *
-from Statistiekalgoritmen.statistiek import *
+from basisfuncties import laad_json_bestand#functie
+from basisfuncties import json_path#bestand
+from Statistiekalgoritmen.statistiek import plot_staafdiagram_rapportcijfers,plot_insight_ratings_per_game
 from views import views
-import pandas as pd
-import json
-import os
+
 
 app = Flask(__name__, template_folder='templates')
 

@@ -1,8 +1,6 @@
 import pandas as pd
 import json
 import os
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 def laad_json_bestand(bestandsnaam):
@@ -113,3 +111,5 @@ def freq(data,key):
             freqs[value] = 1
 
     return freqs
+
+json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'json', 'new_steam.json'))

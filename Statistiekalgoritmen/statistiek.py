@@ -1,4 +1,9 @@
-from basisfuncties import *
+from basisfuncties import laad_json_bestand#functie
+from basisfuncties import json_path#bestand
+from onderzoek_data import freq
+import matplotlib.pyplot as plt
+import numpy as np
+import os
 
 def kwantitatief_rapportcijfer_reviews(data):
     """
@@ -30,14 +35,14 @@ def plot_staafdiagram_rapportcijfers(data,key):
         Return:
             Histogram.
     """
-    bla = freq(data,(key))
+    freqs = freq(data,(key))
     lst = [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0]
 
     telling = {}
 
     for i in lst:
         som = 0
-        for key, value in bla.items():
+        for key, value in freqs.items():
             # -0.5 < 0.0 and 0.0 <= 0
             # 0 < 0.1 and 0.1 <= 0.5
             # 0 < 0.2 and 0.2 <= 0.5
@@ -112,9 +117,9 @@ def plot_insight_ratings_per_game(data, game_id):
 
 
 #--------------------------------------------------------------------------------------------------------------------------------#
-json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json', 'new_steam.json'))
 
-#df = laad_json_bestand(json_path)
+df = laad_json_bestand(json_path)
+plot_staafdiagram_rapportcijfers(df,'cijfer')
 #new_data = kwantitatief_rapportcijfer_reviews(df)
 #from_pandas_to_json(new_data,'new_steam_data.json')
 # plot_staafdiagram_rapportcijfers(new_data,'cijfer')
