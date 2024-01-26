@@ -1,4 +1,7 @@
 {% include 'header.html' %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <main id="body">
     <h2> De eerste game </h2>
     <div>
@@ -7,19 +10,48 @@
         <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>
     </div>
 
-    <div class="slideshow">
+    <div class="swiper">
+        <div class="swiper-wrapper">
         {% for game_info_item in game_info %}
             {% for app_id, game_info_data in game_info_item.items() %}
                 {% if game_info_data.success %}
-                    <div class="slideshow_games">
-                        <a href="{{ url_for('game', appid=app_id) }}">
-                            <img src="{{ game_info_data.data.header_image }}">
-                        </a>
-                        <p>{{ game_info_data.data.name }}</p>
+                    <div class="swiper-slide">
+                        <div class="card-contents">
+                            <a href="{{ url_for('game', appid=app_id) }}"><img src="{{ game_info_data.data.header_image }}"></a>
+                            <p class="slideshow-game-title">{{ game_info_data.data.name }}</p>
+                        </div>
                     </div>
                 {% endif %}
             {% endfor %}
         {% endfor %}
+        </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
     </div>
 </main>
  {% include 'footer.html' %}
+
+<script>
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 3,
+        centeredSlides: true,
+        direction: 'horizontal',
+        spaceBetween: '20',
+        loop: true,
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            1200: {
+                slidesPerView: 3,
+            },
+        }
+    });
+</script>
