@@ -2,11 +2,9 @@
 <main id="profile">
    <div id="games_list">
         <h1>Top played games:</h1>
-        {% for game_info in owned_game_info %}
-            <p>{{ game_info["playerstats"]["gameName"] }}<br></p>
+        {% for game in game_info %}
+            <p>{{ game["gameName"] }}<br></p>
         {% endfor %}
-    </div>
-
-
+   </div>
 </main>
 {% include 'footer.html' %}
