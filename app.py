@@ -18,9 +18,9 @@ def home():
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
-    rapportcijfers_histogram = plot_histogram_rapportcijfers(new_data)
-    ratings_game = plot_insight_ratings_per_game(new_data,20)
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, rapportcijfers_histogram=rapportcijfers_histogram,ratings_game=ratings_game)
+    rapportcijfers_staafdiagram = plot_staafdiagram_rapportcijfers(df,'cijfer')
+    ratings_game = plot_insight_ratings_per_game(df,20)
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, rapportcijfers_staafdiagram=rapportcijfers_staafdiagram,ratings_game=ratings_game)
 
 
 if __name__ == '__main__':

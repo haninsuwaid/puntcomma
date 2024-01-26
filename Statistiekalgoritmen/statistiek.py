@@ -19,7 +19,7 @@ def kwantitatief_rapportcijfer_reviews(data):
 
     return sorteer_data(data, 'cijfer', False)
 
-def plot_histogram_rapportcijfers(data):
+def plot_staafdiagram_rapportcijfers(data,key):
     """
         Functie beschrijving:
             Deze functie visualiseert het aantal games per bijbehorend rapportcijfer in de vorm van een histogram.
@@ -30,22 +30,36 @@ def plot_histogram_rapportcijfers(data):
         Return:
             Histogram.
     """
-    #Afmetingen figuur
-    plt.figure(figsize=(10, 10))
+    bla = freq(data,(key))
+    lst = [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0]
+
+    telling = {}
+
+    for i in lst:
+        som = 0
+        for key, value in bla.items():
+            # -0.5 < 0.0 and 0.0 <= 0
+            # 0 < 0.1 and 0.1 <= 0.5
+            # 0 < 0.2 and 0.2 <= 0.5
+            # 0 < 0.3 and 0.3 <= 0.5
+            # 0 < 0.4 and 0.4 <= 0.5
+            # 0 < 0.5 and 0.5 <= 0.5
+            # 0 < 0.6 and 0.6 <= 0.5
+            #tel alle waardens bij elkaar op als de indexwaarde
+            if i - 0.5 < key and key <= i:
+                som += value
+
+        telling[i] = som
+
+    plt.figure(figsize=(15, 15))
     plt.figure(facecolor='#1b2838')
-
-    #Maak Historgram
-    plt.hist(data['cijfer'], bins=20, color='#354f52', alpha=1, edgecolor='white')
-
-
-    #x,y,titelnaam
-    plt.xlabel('Rapportcijfer', color ="white")
+    plt.bar(list(telling.keys()), telling.values(), width=0.4, color='#354f52', edgecolor='white')
+    plt.xticks([0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0]
+               , rotation=45, ha='right')
     plt.ylabel('Aantal Games', color="white")
     plt.title('Rapportcijfers', color="white")
     plt.yticks(color="white")
     plt.xticks(color="white")
-
-    plt.xticks(np.arange(0, 10.5))
 
     graph_rapportcijfer = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static','images', 'graph_rapportcijfers'))
     plt.savefig(graph_rapportcijfer)
@@ -98,12 +112,10 @@ def plot_insight_ratings_per_game(data, game_id):
 
 
 #--------------------------------------------------------------------------------------------------------------------------------#
-json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json', 'steam.json'))
+json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json', 'new_steam.json'))
 
-df = laad_json_bestand(json_path)
-new_data = kwantitatief_rapportcijfer_reviews(df)
-
+#df = laad_json_bestand(json_path)
+#new_data = kwantitatief_rapportcijfer_reviews(df)
 #from_pandas_to_json(new_data,'new_steam_data.json')
-
-plot_histogram_rapportcijfers(new_data)
-plot_insight_ratings_per_game(new_data,20)
+# plot_staafdiagram_rapportcijfers(new_data,'cijfer')
+# plot_insight_ratings_per_game(new_data,20)
