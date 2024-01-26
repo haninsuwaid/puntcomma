@@ -2,10 +2,6 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from views import views
-import pandas as pd
-import json
-import os
-
 
 app = Flask(__name__, template_folder='templates')
 
@@ -65,13 +61,11 @@ def stats():
 
 @app.route('/owned_games/')
 def owned_games():
+    key = session.get('key')
+    steamid = session.get('steamid')
     appid = request.args.get('appid')
-
-    # Assuming steam_game_info is a function that fetches information for a specific game
-    game_info = steam_game_info(appid)
-    return render_template('owned_games.html',appid=appid, game_info=game_info)
-
-
+    game_info = owned_games_info(key, steamid, limit=5)
+    return render_template('owned_games.html', appid=appid, game_info=game_info)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

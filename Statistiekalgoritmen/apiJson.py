@@ -9,7 +9,6 @@ def get_api_key(data, keys):
 
 def get_json_api(api, *keys):
     response = requests.get(api)
-
     api_json_data = response.json()
     result = get_api_key(api_json_data, keys)
     return result
@@ -18,13 +17,8 @@ def user(key, steamid):
     user = get_json_api(
         f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}",
         "response", "players")
-    for data in user:
-        persona_name = data["personaname"]
-        profile_url = data["profileurl"]
-        avatar_full = data["avatarfull"]
-        real_name = data["realname"]
-        loccountry_code = data["loccountrycode"]
-    return data
+
+    return user
 
 
 def amount_owned_games(key, steamid):
@@ -33,7 +27,6 @@ def amount_owned_games(key, steamid):
         "response"
     )
     return games
-
 
 
 def all_steam_games(limit=0):
