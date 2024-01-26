@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session, redirect, url_for
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from views import views
@@ -6,14 +6,39 @@ import pandas as pd
 import json
 import os
 
+
 app = Flask(__name__, template_folder='templates')
 
 app.register_blueprint(views, url_prefix="/views")
 
-@app.route('/')
-def landingspage():
+app.secret_key = 'geheim'
+
+@app.route('/', methods=['GET', 'POST'])
+def landing_page():
+    if request.method == 'POST':
+        session['steamid'] = request.form['steamid']
+        session['key'] = request.form['key']
+        return redirect(url_for('profile'))
     return render_template('landingspage.html')
 
+
+@app.route('/profile/', methods=['GET', 'POST'])
+def profile():
+    if request.method == 'POST':
+        steamid = request.form['steamid']
+        key = request.form['key']
+        session['steamid'] = steamid
+        session['key'] = key
+    steamid = session.get('steamid')
+    key = session.get('key')
+    if not steamid or not key:
+        return redirect(url_for('landing_page'))
+    user_profile = user(key, steamid)
+    owned_games = amount_owned_games(key, steamid)
+    owned_game_info = owned_games_info(key, steamid, limit=20)
+    friend_list_info = friends_list_info(limit=5)
+    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games,
+                           friend_list_info=friend_list_info, owned_game_info=owned_game_info)
 
 
 @app.route('/home/')
@@ -34,22 +59,17 @@ def game(appid):
     return render_template('game.html', game=games_data)
 
 
-@app.route('/profile/')
-def profile():
-    user_profile = user()
-    owned_games = amount_owned_games()
-    friend_list_info = friends_list_info(limit=5)
-    return render_template('profile.html', user_profile=user_profile, owned_games=owned_games, friend_list_info=friend_list_info)
-
-
 @app.route('/stats/')
 def stats():
     return render_template('stats.html')
 
 @app.route('/owned_games/')
 def owned_games():
-    owned_game_info = owned_games_info(limit=20)
-    return render_template('owned_games.html', owned_game_info=owned_game_info)
+    appid = request.args.get('appid')
+
+    # Assuming steam_game_info is a function that fetches information for a specific game
+    game_info = steam_game_info(appid)
+    return render_template('owned_games.html',appid=appid, game_info=game_info)
 
 
 
