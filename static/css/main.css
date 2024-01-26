@@ -80,86 +80,6 @@ label {
     padding: 7vh;
 }
 
-@media only screen and (min-width: 1024.1px) {
-
-    .header {
-        z-index: 999;
-        height: 120px;
-        background-color: #171d25;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .header {
-        z-index: 999;
-        height: 120px;
-        background-color: #171d25;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .menu a:hover {
-        background-size: 20% 3px, auto;
-    }
-
-    .header {
-        position: fixed;
-    }
-
-
-    i {
-        position: relative;
-        display: block;
-        margin-right: 10px;
-        top: -21vh;
-    }
-
-    .menu {
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background-color: #171d25;
-        right: -200%;
-        margin-top: 120px;
-        text-align: center;
-        line-height: normal;
-        transition: 250ms;
-    }
-
-    .menu a {
-        float: none;
-        display: block;
-        text-align: center;
-        margin-right: 0px;
-        padding: 20px;
-    }
-
-    #chk:checked ~ .menu {
-        right: 0;
-    }
-
-    .menubutton {
-        display: block;
-        position: relative;
-        float: right;
-        display: flex;
-        padding-right: 44px;
-        padding-top: 30px;
-        z-index: 2;
-    }
-
-    .logo {
-        height: -webkit-fill-available;
-        margin-left: 0px;
-    }
-}
 
 body{
     color: #c7d5e0;
@@ -258,6 +178,28 @@ footer a:hover{
     background-color: #1b2838;
 }
 
+.slideshow-game-title{
+    font-size: 0.9rem;
+}
+
+
+/* End styling of the slideshow */
+/* Start styling of the game info page */
+.game-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px 30px 0px;
+}
+
+.game-details{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 20rem;
+}
+
 .card-contents{
     display: flex;
     align-items: center;
@@ -267,13 +209,15 @@ footer a:hover{
     height: 100%;
 }
 
-.slideshow-game-title{
-    font-size: 0.9rem;
+.game-details img{
+    margin: 10px 0px 10px 0px;
 }
-/* End styling of the slideshow */
 
+.game-details p{
+    margin: 2px;
+}
+/* End styling of the game info page */
 /* Start Landingspage styling */
-
 .background{
     position: relative;
     width: 100%;
@@ -303,3 +247,91 @@ input {
 
 
 /* End Landingspage styling */
+
+
+
+@media only screen and (min-width: 1024.1px) {
+    .header {
+        z-index: 999;
+        height: 120px;
+        background-color: #171d25;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .header {
+        z-index: 999;
+        height: 120px;
+        background-color: #171d25;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu a:hover {
+        background-size: 20% 3px, auto;
+    }
+
+    .header {
+        position: fixed;
+    }
+
+
+    i {
+        position: relative;
+        display: block;
+        margin-right: 10px;
+        top: -21vh;
+    }
+
+    .menu {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: #171d25;
+        right: -200%;
+        margin-top: 120px;
+        text-align: center;
+        line-height: normal;
+        transition: 250ms;
+    }
+
+    .menu a {
+        float: none;
+        display: block;
+        text-align: center;
+        margin-right: 0px;
+        padding: 20px;
+    }
+
+    #chk:checked ~ .menu {
+        right: 0;
+    }
+
+    .menubutton {
+        display: block;
+        position: relative;
+        float: right;
+        display: flex;
+        padding-right: 44px;
+        padding-top: 30px;
+        z-index: 2;
+    }
+
+    .logo {
+        height: -webkit-fill-available;
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .game-details{
+        width: 80%;
+    }
+}
