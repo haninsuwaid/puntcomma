@@ -8,28 +8,36 @@ import matplotlib.pyplot as plt
 def laad_json_bestand(bestandsnaam):
     """
         Functie beschrijving:
-            Deze functie converteert een .json bestand naar een Pandas DataFrame.
+            Deze functie laadt JSON-gegevens uit een bestand of een lijst, en converteert deze naar een Pandas DataFrame.
+            Het bestand kan zowel een JSON-bestand als een lijst met JSON-objecten zijn.
 
         Parameters:
-            Bestandsnaam: .json bestand
+            Bestandsnaam: JSON-bestand of lijst.
 
         Return:
             Pandas Dataframe.
 
         Bron:
             - https://saturncloud.io/blog/how-to-convert-nested-json-to-pandas-dataframe-with-specific-format/
+            - https://note.nkmk.me/en/python-type-isinstance/
+            - https://www.geeksforgeeks.org/create-a-pandas-dataframe-from-lists/
     """
-    with open((bestandsnaam)) as bestand:
+
+    if type(bestandsnaam) is list:
+        data = bestandsnaam
+        df = pd.DataFrame(data)
+    else:
+        with open((bestandsnaam)) as bestand:
             data = json.load(bestand)
 
-    #pd.json_normalize convert the JSON to a DataFrame (zie bron)
-    df = pd.json_normalize(data,
-                           meta=["appid", "name", "name", "english", "developer", "publisher", "platforms",
-                                 "required_age", "categories", "genres", "steamspy_tags",
-                                 "achievements", "positive_ratings", "negative_ratings", "average_playtime",
-                                 "median_playtime", "owners", "price"])
-    return df
+            # pd.json_normalize convert the JSON to a DataFrame (zie bron)
+            df = pd.json_normalize(data,
+                                   meta=["appid", "name", "name", "english", "developer", "publisher", "platforms",
+                                         "required_age", "categories", "genres", "steamspy_tags",
+                                         "achievements", "positive_ratings", "negative_ratings", "average_playtime",
+                                         "median_playtime", "owners", "price"])
 
+    return df
 def laad_eerste_game(df):
     """
         Functie beschrijving:
@@ -94,3 +102,14 @@ def from_pandas_to_json(data,filename):
     json_list = data.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
     with open(f'{json_path}', 'x') as bestand:
         json.dump(json_list, bestand, indent=4)
+
+def freq(data,key):
+    freqs = dict()
+
+    for value in data[key]:
+        if value in freqs:
+            freqs[value] += 1
+        else:
+            freqs[value] = 1
+
+    return freqs
