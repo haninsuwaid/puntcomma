@@ -62,7 +62,6 @@ def all_owned_games(key, steamid):
             appid = owned_games_data["appid"]
             appids.append(appid)
     return appids
-# print(all_owned_games('CF80C4E38FFBC653D80781FB766AFF02', 76561198305615990))
 
 
 def owned_games_info(key, steamid, limit=0):
@@ -76,7 +75,6 @@ def owned_games_info(key, steamid, limit=0):
         if "gameName" in game_info and game_info["gameName"]:
             all_game_info.append({"appid": appid, "game_info": game_info})
     return all_game_info
-# print(owned_games_info('CF80C4E38FFBC653D80781FB766AFF02', 76561198305615990, limit=10))
 
 def friends_steam_id():
     friends = get_json_api(
