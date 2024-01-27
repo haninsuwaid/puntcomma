@@ -1,5 +1,6 @@
 import requests
 import datetime
+import random
 
 def get_api_key(data, keys):
     for key in keys:
@@ -32,6 +33,7 @@ def amount_owned_games(key, steamid):
 def all_steam_games(limit=0):
     games = get_json_api("https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
     apps = games["applist"]["apps"]
+    random.shuffle(apps)
     gamelist = []
     count = 0
     for app in apps:
