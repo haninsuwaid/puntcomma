@@ -76,10 +76,9 @@ def owned_games_info(key, steamid, limit=0):
             all_game_info.append({"appid": appid, "game_info": game_info})
     return all_game_info
 
-def friends_steam_id():
+def friends_steam_id(key, steamid):
     friends = get_json_api(
-        "https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=4A2585114E9D0E9B541C8CEC0A8D8BAA&steamid="
-        "76561198366424343&relationship=friend",
+        f"https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key={key}&steamid={steamid}&relationship=friend",
         "friendslist", "friends"
     )
     friend_list_data = []
@@ -90,12 +89,12 @@ def friends_steam_id():
     return friend_list_data
 
 
-def friends_list_info(limit=0):
-    friends_list_steam_id = friends_steam_id()
+def friends_list_info(key, steamid, limit=0):
+    friends_list_steam_id = friends_steam_id(key, steamid)
     all_friends_info = []
     for index, steamid in enumerate(friends_list_steam_id[:limit]):
         friend_info = get_json_api(
-            f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=B129420016573EE260056E21D4218C90&steamids={steamid}",
+            f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}",
             "response", "players"
         )
         all_friends_info.append(friend_info)

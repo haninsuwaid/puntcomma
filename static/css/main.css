@@ -4,6 +4,7 @@
     margin: 0;
     box-sizing: border-box;
     font-size: 1.2rem;
+    z-index: inherit;
 }
 
 .logo {
@@ -307,11 +308,6 @@ input {
     .menu a:hover {
         background-size: 20% 3px, auto;
     }
-
-    .header {
-        position: fixed;
-    }
-
 
     i {
         position: relative;

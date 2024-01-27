@@ -32,7 +32,7 @@ def profile():
     user_profile = user(key, steamid)
     owned_games = amount_owned_games(key, steamid)
     owned_game_info = owned_games_info(key, steamid, limit=20)
-    friend_list_info = friends_list_info(limit=5)
+    friend_list_info = friends_list_info(key, steamid, limit=5)
     return render_template('profile.html', user_profile=user_profile, owned_games=owned_games,
                            friend_list_info=friend_list_info, owned_game_info=owned_game_info)
 
@@ -71,3 +71,6 @@ def owned_games():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+    # B129420016573EE260056E21D4218C90
+    # 76561198366424343
