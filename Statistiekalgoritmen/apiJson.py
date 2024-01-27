@@ -48,18 +48,17 @@ def steam_game_info(gameid):
     return game_info
 
 
-
 def all_owned_games(key, steamid):
     games = get_json_api(
         f"https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={key}&steamid={steamid}&format=json",
         "response", "games"
     )
     appids = []
-    for owned_games_data in games:
+    sorted_games = sorted(games, key=lambda x: x.get("playtime_forever"))
+    for owned_games_data in sorted_games:
         if owned_games_data["playtime_forever"] > 0:
             appid = owned_games_data["appid"]
             appids.append(appid)
-
     return appids
 
 

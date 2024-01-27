@@ -2,8 +2,8 @@
 <main id="profile">
    <div id="games_list">
         <h1>Top played games:</h1>
-        {% for game in game_info %}
-            <p>{{ game["gameName"] }}<br></p>
+        {% for name in game_name %}
+       <a href="{{ url_for('game', appid=app_id) }}"> <p>{{ name["gameName"] }}<br></p></a>
         {% endfor %}
    </div>
 </main>

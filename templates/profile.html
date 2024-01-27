@@ -24,6 +24,12 @@
                         <p class="status busy"> Busy</p>
                     {% elif friend_info["personastate"] == 3 %}
                         <p class="status away"> Away</p>
+                    {% elif friend_info["personastate"] == 4 %}
+                        <p class="status away"> Soonze</p>
+                    {% elif friend_info["personastate"] == 5 %}
+                        <p class="status busy"> Looking to Trade</p>
+                    {% elif friend_info["personastate"] == 6 %}
+                        <p class="status busy"> Looking to play</p>
                     {% endif %}
                     <br>
                 </div>

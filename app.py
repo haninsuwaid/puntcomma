@@ -64,8 +64,10 @@ def owned_games():
     key = session.get('key')
     steamid = session.get('steamid')
     appid = request.args.get('appid')
-    game_info = owned_games_info(key, steamid, limit=5)
-    return render_template('owned_games.html', appid=appid, game_info=game_info)
+    all_steam_game = all_steam_games(limit=15)
+    game_name = owned_games_info(key, steamid, limit=15)
+    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
+    return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
