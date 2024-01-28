@@ -49,6 +49,11 @@ def steam_game_info(gameid):
     game_info = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
     return game_info
 
+def info_for_steam_games():
+    list_of_games = all_steam_games(limit=10)
+    game_info_steam = [steam_game_info(game["appid"]) for game in list_of_games]
+    return game_info_steam
+
 
 def all_owned_games(key, steamid):
     games = get_json_api(

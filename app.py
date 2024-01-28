@@ -44,9 +44,8 @@ def home():
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
     prijsfrequentie = kwantitatief_frequentie_prijs()
     chart_image = kwalitatief_frequentie_genres()
-    all_steam_game = all_steam_games(limit=10)
-    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game, game_info=game_info)
+    game_info = info_for_steam_games()
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, game_info=game_info)
 
 
 @app.route('/game/<appid>')
@@ -66,7 +65,7 @@ def owned_games():
     appid = request.args.get('appid')
     all_steam_game = all_steam_games(limit=15)
     game_name = owned_games_info(key, steamid, limit=15)
-    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
+    game_info = info_for_steam_games()
     return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
 if __name__ == '__main__':
