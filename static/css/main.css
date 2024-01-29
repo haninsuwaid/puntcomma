@@ -13,6 +13,13 @@
     margin-left: 30px;
 }
 
+.dashboard_text{
+    padding-right: 20vw;
+    padding-left: 20vw;
+    padding-top: 5vh;
+    text-align: center;
+}
+
 .Profile_img img {
     height: 200px;
     filter: drop-shadow(#171d25 0.5rem 0.5rem 25px);
