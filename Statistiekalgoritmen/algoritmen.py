@@ -123,20 +123,20 @@ def kwalitatief_frequentie_genres():
     return file_path
 
 
-"""
-    functie beschrijving:
-        De functie gaat de frequentie berekenen van de prijzen van de games, om te zien
-        hoevaak elke prijcategorie voorkomt op de steam applicatie
-
-    parameters:
-        df: de functie die de data van het json bestand opent en inlaadt
-
-    return: frequentie_prijs
-"""
 def kwantitatief_frequentie_prijs():
+    """
+        function description:
+            The function will calculate the frquency of the game prizes,
+            To see how often each game appears in a price category on the steam application
+
+        return: frequentie_prijs
+    """
+
+    # Lodas the json file and put all the prices from the file in the var prijzen.
     price_data = laad_json_bestand()
     prijzen = price_data['price']
 
+    # Loops all the prices and counts how many games are in the specific price range
     free = len([prijs for prijs in prijzen if prijs == 0])
     under_5 = len([prijs for prijs in prijzen if 0.01 <= prijs < 5])
     between_5_and_10 = len([prijs for prijs in prijzen if 5 <= prijs < 10])
@@ -144,6 +144,7 @@ def kwantitatief_frequentie_prijs():
     between_30_and_60 = len([prijs for prijs in prijzen if 30 <= prijs < 60])
     over_60 = len([prijs for prijs in prijzen if prijs > 60])
 
+    # Creates a dictionary with the var "prijsfrequentie". This way its easy to access all the values in the plt
     prijsfrequentie = {
         "Gratis": free,
         "\u20AC0 - \u20AC5": under_5,
@@ -153,11 +154,12 @@ def kwantitatief_frequentie_prijs():
         "Over \u20AC60": over_60
     }
 
-    fig = plt.figure(figsize=(10, 10))
     plt.figure(facecolor='#1b2838')
-
+    # Put the keys and values from the dictionary in the x and y for the price graph
     x = np.array(list(prijsfrequentie.keys()))
     y = np.array(list(prijsfrequentie.values()))
+
+    # The styling and headings for the price graphs are shown here
     plt.bar(x, y, color='#354f52')
     plt.yticks(color="white")
     plt.xticks(color="white")
@@ -165,6 +167,7 @@ def kwantitatief_frequentie_prijs():
     plt.xlabel("Prijscategorieën", color='white')
     plt.ylabel("Aantal games", color='white')
 
+    # Save the graph in the css map. Every time the function is used it will save it, so it stays updated.
     graph_filename = 'static\images\graph_price.png'
     plt.savefig(graph_filename)
     plt.close()
@@ -172,29 +175,38 @@ def kwantitatief_frequentie_prijs():
 
 def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     """
-        functie beschrijving:
-            De functie gaat door gebruik te maken van een linear regression voorspellen hoe vaak games worden gespeeld.
-            Dit word berekend door gebruik te maken van de hoeveelheid achievements,
-            en hoeveel uur een game wordt gespeeld
+        function description:
+            This function uses a linear regression to predict how often games are played,
+            Based on the amount of achievements a game has.
 
 
         parameters:
-            num_iterations: De hoeveelheid iteraties het algortime gaat runnen
-            learning_rate: de grootte van de stappen voor de iteratie
+            num_iterations: The number of iterations the algorithm will run
+            learning_rate: The size of the steps for the iteration
 
         return: a, b
     """
-    json_data = laad_json_bestand()
 
+    # Get the data from the json and put the achievements in the x and the average playtime in the y
+    # This .tolist() sets all the data automatically in a list
+    json_data = laad_json_bestand()
     x = json_data['achievements'].tolist()
     y = json_data['average_playtime'].tolist()
 
+    # Set the vars a and b on 0
     a = 0
     b = 0
+
+    # Loops the amount of num_iterations
     for _ in range(num_iterations):
+        # Loops through every game with achievements
         for i in range(len(x)):
+            # Checks if a game has less than 500 achievements, more than 0 achievements,
+            # and average playtime is not zero
             if 500 > x[i] > 0 and y[i] > 0:
+                # Calculates the difference between the predicted value and the actual value
                 error = (a + b * x[i]) - y[i]
+                # Updates the coefficients a and b
                 a = a - error * learning_rate
                 b = b - x[i] * error * learning_rate
 
