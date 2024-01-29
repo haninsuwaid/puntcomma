@@ -3,7 +3,7 @@ import json
 import os
 
 
-def laad_json_bestand(bestandsnaam):
+def data_naar_pandas(JsonOrLst):
     """
         Functie beschrijving:
             Deze functie laadt JSON-gegevens uit een bestand of een lijst, en converteert deze naar een Pandas DataFrame.
@@ -21,11 +21,11 @@ def laad_json_bestand(bestandsnaam):
             - https://www.geeksforgeeks.org/create-a-pandas-dataframe-from-lists/
     """
 
-    if type(bestandsnaam) is list:
-        data = bestandsnaam
+    if type(JsonOrLst) is list:
+        data = JsonOrLst
         df = pd.DataFrame(data)
     else:
-        with open((bestandsnaam)) as bestand:
+        with open((JsonOrLst)) as bestand:
             data = json.load(bestand)
 
             # pd.json_normalize convert the JSON to a DataFrame (zie bron)
@@ -36,6 +36,7 @@ def laad_json_bestand(bestandsnaam):
                                          "median_playtime", "owners", "price"])
 
     return df
+
 def laad_eerste_game(df):
     """
         Functie beschrijving:
@@ -80,15 +81,15 @@ def sorteer_data(data,column,ascending_bool,extra_column=None):
 
     return sorted_df
 
-def from_pandas_to_json(data,filename):
+def pandas_naar_json(df, filename):
     """
         Functie beschrijving:
-            Deze functie maakt van een Pandas Dataframe een lijst met dictionaries en
+            Deze functie converteerd een Pandas Dataframe naar een lijst met dicts en
             schrijft deze vervolgens weg naar een .json bestand.
 
         Parameters:
             - Data: Pandas Dataframe.
-            - filename: Naam waarnaar het bestand genoemd dient te worden.
+            - Filename: Naam waar het bestand naar genoemd dient te worden.
 
         Return:
             .json bestand
@@ -97,19 +98,9 @@ def from_pandas_to_json(data,filename):
             - https://datatofish.com/export-pandas-dataframe-json/
     """
     json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','puntcomma', 'json', filename))
-    json_list = data.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
+    json_list = df.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
     with open(f'{json_path}', 'x') as bestand:
         json.dump(json_list, bestand, indent=4)
 
-def freq(data,key):
-    freqs = dict()
-
-    for value in data[key]:
-        if value in freqs:
-            freqs[value] += 1
-        else:
-            freqs[value] = 1
-
-    return freqs
-
+#-------------------------------------------------------------------------------------------------------------------#
 json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'json', 'new_steam.json'))

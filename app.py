@@ -1,8 +1,7 @@
 from flask import Flask, render_template
-from Statistiekalgoritmen.algoritmen import *
-from basisfuncties import laad_json_bestand#functie
+from basisfuncties import data_naar_pandas#functie
 from basisfuncties import json_path#bestand
-from Statistiekalgoritmen.statistiek import plot_staafdiagram_rapportcijfers,plot_insight_ratings_per_game
+from Statistiek_algoritmen.statistiek import plot_staafdiagram_rapportcijfers,plot_insight_ratings_per_game
 from views import views
 
 
@@ -12,14 +11,10 @@ app.register_blueprint(views, url_prefix="/views")
 
 @app.route('/')
 def home():
-    df = laad_json_bestand(json_path)
-    eerste_game = laad_eerste_game(df)
-    sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    prijsfrequentie = kwantitatief_frequentie_prijs()
-    chart_image = kwalitatief_frequentie_genres()
+    df = data_naar_pandas(json_path)
     rapportcijfers_staafdiagram = plot_staafdiagram_rapportcijfers(df,'cijfer')
     ratings_game = plot_insight_ratings_per_game(df,20)
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, rapportcijfers_staafdiagram=rapportcijfers_staafdiagram,ratings_game=ratings_game)
+    return render_template('home.html', rapportcijfers_staafdiagram=rapportcijfers_staafdiagram,ratings_game=ratings_game)
 
 
 if __name__ == '__main__':

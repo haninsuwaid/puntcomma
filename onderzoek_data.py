@@ -1,8 +1,8 @@
-from basisfuncties import laad_json_bestand#functie
+from basisfuncties import data_naar_pandas#functie
 from basisfuncties import json_path#bestand
 from basisfuncties import sorteer_data
 
-#------------------Centrummaten--------------------#
+#---------------------------------------------centrummaten-----------------------------------------------------------#
 def gemiddelde(data,key):
     return sum(data[(key)]) / len(data[(key)])
 
@@ -43,7 +43,7 @@ def modi(data,key):
 
     return modi
 
-#------------------Spreidingsmaten--------------------#
+#---------------------------------------------spreidingsmaten--------------------------------------------------------#
 
 def standaarddeviatie_variantiecoëfficiënt(data,key):
 
@@ -69,10 +69,7 @@ def kwartielen(data,key):
 def interkwartielafstand(q3,q1):
     return q3-q1
 
-
-#-------------------Toepassing-------------------------#
-
-
+#-------------------------------------------------------------------------------------------------------------------#
 def onderzoek_data(data):
     key = input(f'Voer de key in van de data die je wilt onderzoeken: ')
     print(f'\nGemiddelde van de data is: {gemiddelde(data, key)}')
@@ -85,5 +82,5 @@ def onderzoek_data(data):
     print(f'Kwartielen van de data zijn: Q1={q1}, Q2={q2}, Q3={q3}')
     print(f'Interkwartielafstand van de data is: {interkwartielafstand(q3, q1)}')
 
-df = laad_json_bestand(json_path)
+df = data_naar_pandas(json_path)
 #onderzoek_data(df)
