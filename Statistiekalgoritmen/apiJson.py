@@ -21,6 +21,12 @@ def user(key, steamid):
 
     return user
 
+def user_by_id(key, steamid):
+    user = get_json_api(
+        f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}",
+        "response", "players")
+
+    return user
 
 def amount_owned_games(key, steamid):
     games = get_json_api(

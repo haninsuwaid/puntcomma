@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from views import views
+
 
 app = Flask(__name__, template_folder='templates')
 
@@ -68,8 +69,21 @@ def owned_games():
     game_info = info_for_steam_games()
     return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
+#rick's meuk
+@app.route("/testdata")
+def testdata():
+    a = {"key": "value"}
+    return jsonify(a)
+
+@app.route("/test_games/<key>/<user_id>", methods = ['POST'])
+def test_games(key, user_id):
+    user_profile = user_by_id(key, user_id)
+    return jsonify(user_profile)
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host="0.0.0.0")
 
     # B129420016573EE260056E21D4218C90
     # 76561198366424343
