@@ -13,12 +13,24 @@
     margin-left: 30px;
 }
 
-.dashboard_text{
-    padding-right: 20vw;
-    padding-left: 20vw;
-    padding-top: 5vh;
-    text-align: center;
+.dashboard-text{
+    text-align: left;
 }
+.content-div{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.banner-div{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+}
+
 
 .Profile_img img {
     height: 200px;
@@ -320,7 +332,6 @@ input:focus{
     position: relative;
 }
 /* End Landingspage styling */
-
 
 
 @media only screen and (min-width: 1024.1px) {
