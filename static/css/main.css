@@ -232,6 +232,20 @@ footer a:hover{
     font-size: 0.9rem;
 }
 
+#stats{
+    display: flex;
+    justify-content: space-around;
+}
+
+#stats p{
+    font-size: 0.8em;
+    text-align: center;
+}
+
+#stats div{
+    max-width: 40vw;
+}
+
 .card-contents img{
     border-radius: 10px;
     border: 2px solid #171d25;
