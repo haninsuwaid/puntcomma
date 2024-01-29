@@ -1,5 +1,6 @@
 {% include 'header.html' %}
 <main id="profile">
+    <h1 class="dashboard_text">Profile page</h1>
     <div>
         {% for user in user_profile %}
         <div  class="Profile_img"><a href="{{ user['avatarfull'] }}" target="_blank"><img src="{{ user['avatarfull'] }}" alt="Avatar"></a></div>
