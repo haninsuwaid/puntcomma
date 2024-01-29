@@ -5,7 +5,7 @@
         <div  class="Profile_img"><a href="{{ user['avatarfull'] }}" target="_blank"><img src="{{ user['avatarfull'] }}" alt="Avatar"></a></div>
         <p><strong>Real name:</strong> {{user["realname"]}} <br></p>
         <p><strong>Persona name:</strong> {{user["personaname"]}} <br></p>
-        <p><strong>Profiel URL:</strong> <a href="{{ user['profileurl'] }}" target="_blank" >My Steam profile</a><br></p>
+        <p><strong>Profiel URL:</strong> <a href="{{ user['profileurl'] }}" target="_blank">My Steam profile</a><br></p>
         <p><strong>Country code:</strong> {{user["loccountrycode"]}} <br></p>
         <p><a href="{{ url_for('owned_games') }}"><strong>Owned games</strong></a> {{owned_games["game_count"]}}</p>
         {% endfor %}

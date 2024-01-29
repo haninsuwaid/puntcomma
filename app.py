@@ -59,6 +59,7 @@ def game(appid):
 def stats():
     return render_template('stats.html')
 
+
 @app.route('/owned_games/')
 def owned_games():
     key = session.get('key')

@@ -2,6 +2,7 @@ import requests
 import datetime
 import random
 
+
 def get_api_key(data, keys):
     for key in keys:
         data = data.get(key, {})
@@ -13,6 +14,7 @@ def get_json_api(api, *keys):
     api_json_data = response.json()
     result = get_api_key(api_json_data, keys)
     return result
+
 
 def user(key, steamid):
     user = get_json_api(
@@ -75,6 +77,7 @@ def owned_games_info(key, steamid, limit=0):
         if "gameName" in game_info and game_info["gameName"]:
             all_game_info.append({"appid": appid, "game_info": game_info})
     return all_game_info
+
 
 def friends_steam_id(key, steamid):
     friends = get_json_api(
