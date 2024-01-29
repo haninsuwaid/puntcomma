@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from views import views
+
 
 app = Flask(__name__, template_folder='templates')
 
@@ -42,11 +43,8 @@ def home():
     df = laad_json_bestand()
     eerste_game = laad_eerste_game(df)
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    prijsfrequentie = kwantitatief_frequentie_prijs()
-    chart_image = kwalitatief_frequentie_genres()
-    all_steam_game = all_steam_games(limit=10)
-    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, all_steam_game=all_steam_game, game_info=game_info)
+    game_info = info_for_steam_games()
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, game_info=game_info)
 
 
 @app.route('/game/<appid>')
@@ -67,11 +65,24 @@ def owned_games():
     appid = request.args.get('appid')
     all_steam_game = all_steam_games(limit=15)
     game_name = owned_games_info(key, steamid, limit=15)
-    game_info = [steam_game_info(game["appid"]) for game in all_steam_game]
+    game_info = info_for_steam_games()
     return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
+#rick's meuk
+@app.route("/testdata")
+def testdata():
+    a = {"key": "value"}
+    return jsonify(a)
+
+@app.route("/test_games/<key>/<user_id>", methods = ['POST'])
+def test_games(key, user_id):
+    user_profile = user_by_id(key, user_id)
+    return jsonify(user_profile)
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host="0.0.0.0")
 
     # B129420016573EE260056E21D4218C90
     # 76561198366424343

@@ -206,14 +206,31 @@ footer a:hover{
 .swiper-button-next:after, .swiper-button-prev:after{
     padding: 15px;
     color: white;
-    background-color: #1b2838;
+    background-color: rgba(27, 40, 56, 0.7);
 }
 
 .slideshow-game-title{
     font-size: 0.9rem;
 }
 
+.card-contents img{
+    border-radius: 10px;
+    border: 2px solid #171d25;
+    box-shadow: 1px 2px 2px 1px rgba(0, 120, 130, 0.2);
+    transition: transform .2s;
+}
+.card-contents img:hover{
+    transform: scale(1.05);
+}
 
+.main-game-img{
+    border-radius: 10px;
+    border: 2px solid #171d25;
+    transition: transform .2s;
+}
+.main-game-img:hover{
+    transform: scale(1.1);
+}
 /* End styling of the slideshow */
 /* Start styling of the game info page */
 .game-card{
@@ -253,30 +270,48 @@ footer a:hover{
     position: relative;
     width: 100%;
     height: 100vh;
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('../images/landingspagebc.jpg') center/cover;
+    background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url('../images/landingspagebc.jpg') center/cover;
 }
 
 input {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     margin: 10px 0px 10px 0px;
     border: none;
     border-radius: 10px;
     background-color: #444;
     color: white;
+    border: 3px solid #1b2838;
+    transition: transform 0.4s;
+}
+input:focus{
+    outline: none;
+    background-color: #444;
+    transform: scale(1.05);
 }
 
+
 .form{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+
+}
+.form form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100%;
 }
-
-
+.form-label{
+    width: 50vw;
+    text-align: left;
+    position: relative;
+}
 /* End Landingspage styling */
 
 

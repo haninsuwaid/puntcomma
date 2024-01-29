@@ -10,8 +10,10 @@
 <div class="background">
     <div class="form">
         <form name="form" method="POST" action="{{ url_for('profile') }}">
-            <input placeholder="Steam Id" type="text" name="steamid" required><br>
-            <input placeholder="Steam key" type="text" name="key" required><br>
+                <label class="form-label">Your steam id:</label>
+                <input placeholder="Steam Id" type="text" name="steamid" required><br>
+                <label class="form-label">Your steam key:</label>
+                <input placeholder="Steam key" type="text" name="key" required><br>
             <input type="submit" value="submit">
         </form>
     </div>
