@@ -43,10 +43,8 @@ def home():
     df = laad_json_bestand()
     eerste_game = laad_eerste_game(df)
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    prijsfrequentie = kwantitatief_frequentie_prijs()
-    chart_image = kwalitatief_frequentie_genres()
     game_info = info_for_steam_games()
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, game_info=game_info)
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, game_info=game_info)
 
 
 @app.route('/game/<appid>')

@@ -206,7 +206,7 @@ footer a:hover{
 .swiper-button-next:after, .swiper-button-prev:after{
     padding: 15px;
     color: white;
-    background-color: #1b2838;
+    background-color: rgba(27, 40, 56, 0.7);
 }
 
 .slideshow-game-title{
