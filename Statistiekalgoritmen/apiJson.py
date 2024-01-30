@@ -1,5 +1,6 @@
 import requests
 import random
+import asyncio
 
 
 def get_api_key(data, keys):
@@ -33,6 +34,76 @@ def get_json_api(api, *keys):
     return result
 
 
+def all_steam_games(limit=0):
+    """
+        function description:
+            This function returns a chosen amount of random steam games based on the parameter
+
+        parameters:
+            limit: The number of games it will get from the api
+
+        return: gamelist
+    """
+    # Get the games out of the api
+    games = get_json_api("https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
+    apps = games["applist"]["apps"]
+    # Shuffles the games in a random order
+    random.shuffle(apps)
+    gamelist = []
+    count = 0
+    # Uses for statement to loop through all the games
+    for app in apps:
+        # Only add games that have a name
+        if "name" in app and app["name"]:
+            # Append the appid to the empty array
+            gamelist.append({"appid": app["appid"]})
+            count += 1
+        # if the count is equal to the parameter it will break the function and return the gamelist
+        if count == limit:
+            break
+    return gamelist
+
+
+def steam_game_info(gameid):
+    """
+        function description:
+            This function returns information of the chosen steam game
+
+        parameters:
+            gameid: The id that chooses which games information will be shown
+
+        return: game_info
+    """
+    game_info = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
+    return game_info
+
+
+def info_for_steam_games():
+    """
+        function description:
+            This function will return a list of steam games with the information of the games
+
+        return: game_info_steam
+    """
+
+    # Calls the function "all_steam_games" that returns all the ids from games and puts it in "list_of_games"
+    list_of_games = all_steam_games(limit=10)
+    # Loops through each id in the list_of_games. Call the function steam_game_info with the appid,
+    # To get all the data from the random chosen steam game, put it in a var and return the game_inf_steam
+    game_info_steam = [steam_game_info(game["appid"]) for game in list_of_games]
+    return game_info_steam
+
+
+# async def nested():
+#     return 42
+#
+#
+# async def main():
+#     await asyncio.gather(nested())
+#
+# asyncio.run(main())
+
+
 def user(key, steamid):
     """
         Functie beschrijving:
@@ -64,19 +135,6 @@ def user_by_id(key, steamid):
 
     return user_id
 
-
-def steam_game_info(gameid):
-    """
-        function description:
-            This function returns information of the chosen steam game
-
-        parameters:
-            gameid: The id that chooses which games information will be shown
-
-        return: game_info
-    """
-    game_info = get_json_api(f"https://store.steampowered.com/api/appdetails?appids={gameid}")
-    return game_info
 
 
 def amount_owned_games(key, steamid):
@@ -187,49 +245,3 @@ def friends_list_info(key, steamid, limit=0):
         )
         all_friends_info.append(friend_info)
     return all_friends_info
-
-
-def all_steam_games(limit=0):
-    """
-        function description:
-            This function returns a chosen amount of random steam games based on the parameter
-
-        parameters:
-            limit: The number of games it will get from the api
-
-        return: gamelist
-    """
-    # Get the games out of the api
-    games = get_json_api("https://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json")
-    apps = games["applist"]["apps"]
-    # Shuffles the games in a random order
-    random.shuffle(apps)
-    gamelist = []
-    count = 0
-    # Uses for statement to loop through all the games
-    for app in apps:
-        # Only add games that have a name
-        if "name" in app and app["name"]:
-            # Append the appid to the empty array
-            gamelist.append({"appid": app["appid"]})
-            count += 1
-        # if the count is equal to the parameter it will break the function and return the gamelist
-        if count == limit:
-            break
-    return gamelist
-
-
-def info_for_steam_games():
-    """
-        function description:
-            This function will return a list of steam games with the information of the games
-
-        return: game_info_steam
-    """
-
-    # Calls the function "all_steam_games" that returns all the ids from games and puts it in "list_of_games"
-    list_of_games = all_steam_games(limit=10)
-    # Loops through each id in the list_of_games. Call the function steam_game_info with the appid,
-    # To get all the data from the random chosen steam game, put it in a var and return the game_inf_steam
-    game_info_steam = [steam_game_info(game["appid"]) for game in list_of_games]
-    return game_info_steam
