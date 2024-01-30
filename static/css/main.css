@@ -16,6 +16,10 @@
 .dashboard-text, .banner-text{
     text-align: center;
 }
+.stats_text{
+    padding-top: 5vh;
+    text-align: center;
+}
 .content-div{
     margin-top: 5vh;
     display: flex;

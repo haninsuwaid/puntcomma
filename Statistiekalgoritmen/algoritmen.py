@@ -47,43 +47,66 @@ def kwantitatief_rapportcijfer_reviews(data):
 
     return top_100
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
     a = 0
     b = 0
 
-    for aantal in range(num_iterations):
+    for iteration in range(num_iterations):
         for i in range(len(prijs)):
             error = (a + b * prijs[i]) - rating[i]
             a -= error * learning_rate
             b -= prijs[i] * error * learning_rate
-
     coefficients = [a, b]
-    nieuwe_prijzen = [0.0, 10, 50]
-    # voorspellingen = [coefficients[0] + coefficients[1] * prijs for prijs in nieuwe_prijzen]
-    #
-    # print("Voorspelde cijfers voor nieuwe prijzen:", voorspellingen)
-
     return coefficients
+
 
 data = laad_json_bestand()
 top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
 prijs = top_100_meest_gereviewde_games["price"].tolist()
 rating = top_100_meest_gereviewde_games["cijfer"].tolist()
-# coefficients = gradient_descent(prijs, rating)
-# print("Gevonden coëfficiënten:", coefficients)
 
-"""
-    functie beschrijving:
-        De functie gaat de frequentie berekenen van de top 10 genres, om te zien
-        hoevaak elke genre het meest voorkomen in games
 
-    parameters:
-        geen
+coefficients = gradient_descent(prijs, rating)
+a, b = coefficients
 
-    return:
-        De frequentie van de top 10 genre
-"""
+
+def linear_regression(x):
+    return a + b * x
+
+
+def linear_regression_price_rating():
+    plt.figure(facecolor='#1b2838')
+    plt.scatter(prijs, rating, color='blue', label='Data points')
+    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.ylabel('Rating', color='white')
+    plt.xlabel('Price', color='white')
+    plt.legend()
+    plt.show()
+    file_path = '..\static\images\linear_regression_price_rating.png'
+    plt.savefig(file_path)
+    plt.close()
+    return file_path
+
+linear_regression_price_rating()
+
 def kwalitatief_frequentie_genres():
+    """
+        functie beschrijving:
+            De functie gaat de frequentie berekenen van de top 10 genres, om te zien
+            hoevaak elke genre het meest voorkomen in games. Op basis van de resultaten, maak ik staafdiagram
+            met de frequentie van de top 10 genres met de meeste games. De grafiek wordt gestyled en opgeslagen.
+        parameters:
+            geen
+        return:
+            De file_path waar de staafdiagram wordt opgeslagen.
+    """
     data = laad_json_bestand()
     genres = data['genres']
     lst = []
@@ -111,12 +134,9 @@ def kwalitatief_frequentie_genres():
     plt.barh(game_genre, values, color='#354f52', height=0.7)
     plt.yticks(color="white")
     plt.xticks(color="white")
-
-
     plt.xlabel("Aantal games", color='white')
     plt.ylabel("Genres", color='white')
     plt.title("Hoevaak games voorkomen in elke genre", color='white')
-    # plt.show()
     file_path = 'static\images\graph_genre.png'
     plt.savefig(file_path)
     plt.close()

@@ -5,10 +5,8 @@ def kwantitatief_rapportcijfer_reviews(data):
         Functie beschrijving:
             De functie berekend de waardering obv het totaal aantal gegeven negatieve en positieve beoordelingen
             en wordt uitgedrukt op een schaal van 10.
-
         Parameters:
             Data: Pandas Dataframe
-
         Return:
             Een bijgewerkte Pandas Dataframe, met toegevoegde kolommen per game voor het totaal gegeven beoordelingen en
             de waarding.
@@ -23,10 +21,8 @@ def plot_histogram_rapportcijfers(data):
     """
         Functie beschrijving:
             Deze functie visualiseert het aantal games per bijbehorend rapportcijfer in de vorm van een histogram.
-
         Parameters:
             Data: Pandas dataframe.
-
         Return:
             Histogram.
     """
@@ -54,14 +50,11 @@ def plot_insight_ratings_per_game(data, game_id):
         Functie beschrijving:
             Deze functie visualiseert het aantal negatieve en positieve beoordelingen van een game door middel van een cirkeldiagram.
             Tevens wordt het totaal aantal gegeven beoordelingen van deze game weergegeven.
-
         Parameters:
             Data: Pandas dataframe.
             Game_id: ID van de game
-
         Return:
             Cirkeldiagram
-
         Bronnen:
             - https://www.w3schools.com/python/matplotlib_pie_charts.asp
             - https://www.w3schools.com/colors/colors_names.asp
@@ -86,12 +79,10 @@ def plot_insight_ratings_per_game(data, game_id):
 
 
 #--------------------------------------------------------------------------------------------------------------------------------#
-json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json', 'steam.json'))
+json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json', 'new_steam.json'))
 
 df = laad_json_bestand(json_path)
 new_data = kwantitatief_rapportcijfer_reviews(df)
-
-#from_pandas_to_json(new_data,'new_steam_data.json')
 
 plot_histogram_rapportcijfers(new_data)
 plot_insight_ratings_per_game(new_data,20)
