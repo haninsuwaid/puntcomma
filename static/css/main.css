@@ -13,14 +13,16 @@
     margin-left: 30px;
 }
 
-.dashboard-text{
-    text-align: left;
+.dashboard-text, .banner-text{
+    text-align: center;
 }
 .content-div{
     margin-top: 5vh;
     display: flex;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    height: 75%;
 }
 .banner-div{
     margin-top: 5vh;
@@ -28,6 +30,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 75%;
+    height: 50vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('../images/steam-logo-welcome-banner.jpg') center/cover;
+    border-radius: 10px;
+    border: 2px solid #171d25;
+}
+.banner-div-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 75%;
 }
 
