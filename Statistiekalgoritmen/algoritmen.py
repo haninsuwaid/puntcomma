@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def laad_json_bestand():
-    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'steam.json')
+    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
     with open(json_path) as bestand:
         data = json.load(bestand)
 
