@@ -26,11 +26,11 @@
         <div class="swiper-wrapper">
         {% for game_info_item in game_info %}
             {% for app_id, game_info_data in game_info_item.items() %}
-                {% if game_info_data.success %}
+                {% if game_info_data['success'] %}
                     <div class="swiper-slide">
                         <div class="card-contents">
-                            <a href="{{ url_for('game', appid=app_id) }}"><img src="{{ game_info_data.data.header_image }}"></a>
-                            <p class="slideshow-game-title">{{ game_info_data.data.name }}</p>
+                            <a href="{{ url_for('game', appid=app_id) }}"><img src="{{ game_info_data['data']['header_image'] }}"></a>
+                            <p class="slideshow-game-title">{{ game_info_data['data']['name'] }}</p>
                         </div>
                     </div>
                 {% endif %}
