@@ -16,7 +16,6 @@ import base64
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 def laad_json_bestand():
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
     with open(json_path) as bestand:
@@ -44,9 +43,13 @@ def kwantitatief_rapportcijfer_reviews(data):
     data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
     data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
     gesorteerde_data = data.sort_values(by='totaal_ratings', ascending=False)
-    top_100 = gesorteerde_data.head(200)
+    top_100 = gesorteerde_data.head(100)
 
     return top_100
+
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
@@ -54,10 +57,10 @@ def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
     b = 0
 
     for iteration in range(num_iterations):
-        for i in range(len(rating)):
-            error = (a + b * rating[i]) - prijs[i]
+        for i in range(len(prijs)):
+            error = (a + b * prijs[i]) - rating[i]
             a -= error * learning_rate
-            b -= rating[i] * error * learning_rate
+            b -= prijs[i] * error * learning_rate
     coefficients = [a, b]
     return coefficients
 
@@ -66,6 +69,7 @@ data = laad_json_bestand()
 top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
 prijs = top_100_meest_gereviewde_games["price"].tolist()
 rating = top_100_meest_gereviewde_games["cijfer"].tolist()
+
 
 coefficients = gradient_descent(prijs, rating)
 a, b = coefficients
@@ -77,21 +81,18 @@ def linear_regression(x):
 
 def linear_regression_price_rating():
     plt.figure(facecolor='#1b2838')
-    plt.scatter(rating, prijs, color='#354f52', label='Data points')
-    plt.plot(rating, linear_regression(np.array(rating)), 'k', label='Linear Regression')
+    plt.scatter(prijs, rating, color='blue', label='Data points')
+    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
     plt.yticks(color="white")
     plt.xticks(color="white")
-    plt.xlabel('Rating', color='white')
-    plt.ylabel('Price', color='white')
+    plt.ylabel('Rating', color='white')
+    plt.xlabel('Price', color='white')
     plt.legend()
-    file_path = 'static\images\linear_regression_price_rating.png'
+    plt.show()
+    file_path = '..\static\images\linear_regression_price_rating.png'
     plt.savefig(file_path)
     plt.close()
     return file_path
-
-
-linear_regression_price_rating()
-
 
 def kwalitatief_frequentie_genres():
     """
@@ -138,7 +139,19 @@ def kwalitatief_frequentie_genres():
     plt.savefig(file_path)
     plt.close()
     return file_path
-
+    plt.figure(facecolor='#1b2838')
+    plt.scatter(prijs, rating, color='blue', label='Data points')
+    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.ylabel('Rating', color='white')
+    plt.xlabel('Price', color='white')
+    plt.legend()
+    plt.show()
+    file_path = '..\static\images\linear_regression_price_rating.png'
+    plt.savefig(file_path)
+    plt.close()
+    return file_path
 
 def kwantitatief_frequentie_prijs():
     """
@@ -190,8 +203,7 @@ def kwantitatief_frequentie_prijs():
     plt.close()
     return graph_filename
 
-
-def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
+def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     """
         function description:
             This function uses a linear regression to predict how often games are played,
@@ -211,6 +223,16 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     x = json_data['achievements'].tolist()
     y = json_data['average_playtime'].tolist()
 
+    filtered_x = []
+    filtered_y = []
+    for i in range(len(x)):
+        # Checks if a game has less than 500 achievements, more than 0 achievements,
+        # and average playtime is not zero and under the 5000
+        if 500 > x[i] > 0 and 5000 > y[i] > 10:
+            # Append the games to a new list
+            filtered_x.append(x[i])
+            filtered_y.append(y[i])
+
     # Set the vars a and b on 0
     a = 0
     b = 0
@@ -218,13 +240,31 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     # Loops the amount of num_iterations
     for _ in range(num_iterations):
         # Loops through every game with achievements
-        for i in range(len(x)):
-            # Checks if a game has less than 500 achievements, more than 0 achievements,
-            # and average playtime is not zero
-            if 500 > x[i] > 0 and y[i] > 0:
-                # Calculates the difference between the predicted value and the actual value
-                error = (a + b * x[i]) - y[i]
-                # Updates the coefficients a and b
-                a = a - error * learning_rate
-                b = b - x[i] * error * learning_rate
+        for i in range(len(filtered_x)):
+            # Calculates the difference between the predicted value and the actual value
+            error = (a + b * filtered_x[i]) - filtered_y[i]
+            # Updates the coefficients a and b
+            a = a - error * learning_rate
+            b = b - filtered_x[i] * error * learning_rate
+
+    filtered_x = np.array(filtered_x)
+    model_line = a + b * filtered_x
+
+    plt.figure(figsize=(10, 10),facecolor="#1b2838")
+    plt.scatter(filtered_x, filtered_y, color="#4093D5", label="Games")
+    plt.plot(filtered_x, model_line, color="#FF6347", label="Predicted playtime")
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.title('Prediction of the playtime based on achievements', color="white")
+    plt.ylabel('Average Playtime', color="white")
+    plt.xlabel('Achievements', color="white")
+    plt.legend(loc="upper right")
+    ax = plt.gca()
+    ax.set_facecolor("#1b2838")
+    graph_filename = '..\static\images\linear_regression_achievements_playtime.png'
+    plt.savefig(graph_filename)
+    plt.close()
     return a, b
+
+
+
