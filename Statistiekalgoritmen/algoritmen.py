@@ -16,6 +16,7 @@ import base64
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def laad_json_bestand():
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
     with open(json_path) as bestand:
@@ -43,13 +44,9 @@ def kwantitatief_rapportcijfer_reviews(data):
     data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
     data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
     gesorteerde_data = data.sort_values(by='totaal_ratings', ascending=False)
-    top_100 = gesorteerde_data.head(100)
+    top_100 = gesorteerde_data.head(200)
 
     return top_100
-
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
@@ -57,10 +54,10 @@ def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
     b = 0
 
     for iteration in range(num_iterations):
-        for i in range(len(prijs)):
-            error = (a + b * prijs[i]) - rating[i]
+        for i in range(len(rating)):
+            error = (a + b * rating[i]) - prijs[i]
             a -= error * learning_rate
-            b -= prijs[i] * error * learning_rate
+            b -= rating[i] * error * learning_rate
     coefficients = [a, b]
     return coefficients
 
@@ -69,7 +66,6 @@ data = laad_json_bestand()
 top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
 prijs = top_100_meest_gereviewde_games["price"].tolist()
 rating = top_100_meest_gereviewde_games["cijfer"].tolist()
-
 
 coefficients = gradient_descent(prijs, rating)
 a, b = coefficients
@@ -81,20 +77,21 @@ def linear_regression(x):
 
 def linear_regression_price_rating():
     plt.figure(facecolor='#1b2838')
-    plt.scatter(prijs, rating, color='blue', label='Data points')
-    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
+    plt.scatter(rating, prijs, color='#354f52', label='Data points')
+    plt.plot(rating, linear_regression(np.array(rating)), 'k', label='Linear Regression')
     plt.yticks(color="white")
     plt.xticks(color="white")
-    plt.ylabel('Rating', color='white')
-    plt.xlabel('Price', color='white')
+    plt.xlabel('Rating', color='white')
+    plt.ylabel('Price', color='white')
     plt.legend()
-    plt.show()
-    file_path = '..\static\images\linear_regression_price_rating.png'
+    file_path = 'static\images\linear_regression_price_rating.png'
     plt.savefig(file_path)
     plt.close()
     return file_path
 
+
 linear_regression_price_rating()
+
 
 def kwalitatief_frequentie_genres():
     """
@@ -193,6 +190,7 @@ def kwantitatief_frequentie_prijs():
     plt.close()
     return graph_filename
 
+
 def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     """
         function description:
@@ -229,6 +227,4 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
                 # Updates the coefficients a and b
                 a = a - error * learning_rate
                 b = b - x[i] * error * learning_rate
-
     return a, b
-# print(achievement_playtime())
