@@ -14,7 +14,7 @@ def mergesort_split(lst, value):
         • Voor elke lijst wordt een teller bijgehouden.
         • Bij elke vergelijking wordt de voorwaarde gesteld dat de teller kleiner is dan de lengte van de lijst.
         • Bij elke wisseling wordt er een teller bijgehouden, zodat duidelijk is op welke plaats het item neergezet dient te worden.
-        •
+
         • Als voorbeeld:
         • 5 en 4 worden met elkaar vergeleken.
         • Als 5 < 4, wat onwaar is, gaat de code door naar het 'else' statement waar 4 op zijn plek wordt gezet en de teller voor deze lijst toeneemt.
@@ -71,7 +71,7 @@ def mergesort_split(lst, value):
     return lst,elapsed_time
 
 
-#-------------------------------------------------------------------------------------------------------------------#
+#• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • #
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
 with open(file, 'r') as bestand:
     gegevens = json.load(bestand)
