@@ -1,8 +1,7 @@
 """
-    Hier gaan wij een lege functie maken met parameters, en de return. Daarbij gaan we ook uitleg
+    Hier gaan wij een lege functie maken met parameters, en returns. Daarbij gaan we ook uitleg
     schrijven over wat de functie doet, waar de parameters voor gebruikt worden,
-    en wat de functie uiteindelijk returnt. Alleen dus Statistiekalgoritmen van
-    de verplichte onderdelen van Ai.
+    en wat de functie uiteindelijk returnt. Alleen dus van Ai.
 """
 
 import pandas as pd
@@ -48,11 +47,17 @@ def kwantitatief_rapportcijfer_reviews(data):
     return top_100
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-
 def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
+    """
+        functie beschrijving:
+        parameters:
+            prijs:
+            rating:
+            num_interations:
+            learing_rate:
+        return:
+            Dcoefficients
+    """
     a = 0
     b = 0
 
@@ -76,10 +81,24 @@ a, b = coefficients
 
 
 def linear_regression(x):
+    """
+        functie beschrijving:
+
+        parameters:
+            x:
+        return:
+            som
+    """
     return a + b * x
 
 
 def linear_regression_price_rating():
+    """
+        functie beschrijving:
+
+        return:
+            De file_path waar de staafdiagram wordt opgeslagen.
+    """
     plt.figure(facecolor='#1b2838')
     plt.scatter(prijs, rating, color='blue', label='Data points')
     plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
@@ -126,8 +145,6 @@ def kwalitatief_frequentie_genres():
 
     game_genre = list(top_10.keys())
     values = list(top_10.values())
-
-    fig = plt.figure(figsize=(10, 10))
     plt.figure(facecolor='#1b2838')
     plt.barh(game_genre, values, color='#354f52', height=0.7)
     plt.yticks(color="white")
@@ -152,6 +169,7 @@ def kwalitatief_frequentie_genres():
     plt.savefig(file_path)
     plt.close()
     return file_path
+
 
 def kwantitatief_frequentie_prijs():
     """
@@ -265,6 +283,3 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     plt.savefig(graph_filename)
     plt.close()
     return a, b
-
-
-
