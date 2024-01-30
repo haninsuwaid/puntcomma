@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def laad_json_bestand():
-    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'steam.json')
+    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
     with open(json_path) as bestand:
         data = json.load(bestand)
 
@@ -173,7 +173,7 @@ def kwantitatief_frequentie_prijs():
     plt.close()
     return graph_filename
 
-def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
+def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     """
         function description:
             This function uses a linear regression to predict how often games are played,
@@ -193,6 +193,16 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     x = json_data['achievements'].tolist()
     y = json_data['average_playtime'].tolist()
 
+    filtered_x = []
+    filtered_y = []
+    for i in range(len(x)):
+        # Checks if a game has less than 500 achievements, more than 0 achievements,
+        # and average playtime is not zero and under the 5000
+        if 500 > x[i] > 0 and 5000 > y[i] > 10:
+            # Append the games to a new list
+            filtered_x.append(x[i])
+            filtered_y.append(y[i])
+
     # Set the vars a and b on 0
     a = 0
     b = 0
@@ -200,15 +210,27 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.0001):
     # Loops the amount of num_iterations
     for _ in range(num_iterations):
         # Loops through every game with achievements
-        for i in range(len(x)):
-            # Checks if a game has less than 500 achievements, more than 0 achievements,
-            # and average playtime is not zero
-            if 500 > x[i] > 0 and y[i] > 0:
-                # Calculates the difference between the predicted value and the actual value
-                error = (a + b * x[i]) - y[i]
-                # Updates the coefficients a and b
-                a = a - error * learning_rate
-                b = b - x[i] * error * learning_rate
+        for i in range(len(filtered_x)):
+            # Calculates the difference between the predicted value and the actual value
+            error = (a + b * filtered_x[i]) - filtered_y[i]
+            # Updates the coefficients a and b
+            a = a - error * learning_rate
+            b = b - filtered_x[i] * error * learning_rate
+
+    filtered_x = np.array(filtered_x)
+    model_line = a + b * filtered_x
+
+    plt.scatter(filtered_x, filtered_y, color="blue", label="Games")
+    plt.plot(filtered_x, model_line, color="red", label="Prediction playtime")
+    plt.title('Prediction of the playtime based on achievements')
+    plt.ylabel('Average Playtime')
+    plt.xlabel('Achievements')
+    plt.legend()
+    plt.show()
 
     return a, b
-# print(achievement_playtime())
+achievement_playtime()
+
+
+
+
