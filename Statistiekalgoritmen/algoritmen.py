@@ -94,8 +94,6 @@ def linear_regression_price_rating():
     plt.close()
     return file_path
 
-linear_regression_price_rating()
-
 def kwalitatief_frequentie_genres():
     """
         functie beschrijving:
@@ -141,7 +139,19 @@ def kwalitatief_frequentie_genres():
     plt.savefig(file_path)
     plt.close()
     return file_path
-
+    plt.figure(facecolor='#1b2838')
+    plt.scatter(prijs, rating, color='blue', label='Data points')
+    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.ylabel('Rating', color='white')
+    plt.xlabel('Price', color='white')
+    plt.legend()
+    plt.show()
+    file_path = '..\static\images\linear_regression_price_rating.png'
+    plt.savefig(file_path)
+    plt.close()
+    return file_path
 
 def kwantitatief_frequentie_prijs():
     """
@@ -240,17 +250,21 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     filtered_x = np.array(filtered_x)
     model_line = a + b * filtered_x
 
-    plt.scatter(filtered_x, filtered_y, color="blue", label="Games")
-    plt.plot(filtered_x, model_line, color="red", label="Prediction playtime")
-    plt.title('Prediction of the playtime based on achievements')
-    plt.ylabel('Average Playtime')
-    plt.xlabel('Achievements')
-    plt.legend()
-    plt.show()
-
+    plt.figure(figsize=(10, 10),facecolor="#1b2838")
+    plt.scatter(filtered_x, filtered_y, color="#4093D5", label="Games")
+    plt.plot(filtered_x, model_line, color="#FF6347", label="Predicted playtime")
+    plt.yticks(color="white")
+    plt.xticks(color="white")
+    plt.title('Prediction of the playtime based on achievements', color="white")
+    plt.ylabel('Average Playtime', color="white")
+    plt.xlabel('Achievements', color="white")
+    plt.legend(loc="upper right")
+    ax = plt.gca()
+    ax.set_facecolor("#1b2838")
+    graph_filename = '..\static\images\linear_regression_achievements_playtime.png'
+    plt.savefig(graph_filename)
+    plt.close()
     return a, b
-achievement_playtime()
-
 
 
 
