@@ -1,7 +1,6 @@
 from flask import request, session, redirect, url_for, jsonify
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
-from basisfuncties.basisfuncties import *
 from basisfuncties.onderzoek_data import *
 from views import views
 
@@ -118,48 +117,10 @@ def owned_games():
     appid = request.args.get('appid')
     game_name = owned_games_info(key, steamid, limit=15)
     game_info = info_for_steam_games()
-<<<<<<< Updated upstream
     return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
 
 #rick's meuk
-@app.route("/testdata")
-def testdata():
-    a = {"key": "value"}
-    return jsonify(a)
-
-
-@app.route("/test_games/<key>/<user_id>", methods = ['POST'])
-def test_games(key, user_id):
-    user_profile = user_by_id(key, user_id)
-    return jsonify(user_profile)
-=======
-    game_info = info_for_steam_games()
-    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, game_info=game_info)
-
-
-@app.route('/game/<appid>')
-def game(appid):
-    games_data = steam_game_info(appid)
-    return render_template('game.html', game=games_data)
-
-
-@app.route('/stats/')
-def stats():
-    return render_template('stats.html')
-
-@app.route('/owned_games/')
-def owned_games():
-    key = session.get('key')
-    steamid = session.get('steamid')
-    appid = request.args.get('appid')
-    all_steam_game = all_steam_games(limit=15)
-    game_name = owned_games_info(key, steamid, limit=15)
-    game_info = info_for_steam_games()
-    return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
-
-#rick's meuk
-
 @app.route("/test_profile/<key>/<user_id>", methods = ['POST'])
 def test_profile(key, user_id):
     user_profile = user_by_id(key, user_id)
@@ -175,7 +136,6 @@ def test_games(key, user_id):
 def test_amount_of_games(key, user_id):
     amount_user_games = amount_owned_games(key, user_id)
     return jsonify(amount_user_games)
->>>>>>> Stashed changes
 
 
 if __name__ == '__main__':

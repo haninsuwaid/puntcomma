@@ -1,7 +1,7 @@
 import requests
 import random
 import asyncio
-from basisfuncties import *
+from basisfuncties.basisfuncties import *
 
 
 def get_api_key(data, keys):
