@@ -1,4 +1,4 @@
-from flask import request, session, redirect, url_for, jsonify
+from flask import request, session, redirect, url_for, jsonify, render_template, Flask
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from basisfuncties.onderzoek_data import *
@@ -73,7 +73,7 @@ def home():
 def game(appid):
     """
         Functie beschrijving:
-            a function that gets the appid of a chosen game and the fucntion steam_game_info uses the id
+            a function that gets the appid of a chosen game and the function steam_game_info uses the id
             to get the game data with the function.
         Parameters:
             appid: the id of a chosen game from the url
@@ -121,6 +121,43 @@ def owned_games():
 
 
 #rick's meuk
+@app.route("/testdata")
+def testdata():
+    a = {"key": "value"}
+    return jsonify(a)
+
+
+@app.route("/test_games/<key>/<user_id>", methods = ['POST'])
+def test_games(key, user_id):
+    user_profile = user_by_id(key, user_id)
+    return jsonify(user_profile)
+=======
+    game_info = info_for_steam_games()
+    return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, game_info=game_info)
+
+
+@app.route('/game/<appid>')
+def game(appid):
+    games_data = steam_game_info(appid)
+    return render_template('game.html', game=games_data)
+
+
+@app.route('/stats/')
+def stats():
+    return render_template('stats.html')
+
+@app.route('/owned_games/')
+def owned_games():
+    key = session.get('key')
+    steamid = session.get('steamid')
+    appid = request.args.get('appid')
+    all_steam_game = all_steam_games(limit=15)
+    game_name = owned_games_info(key, steamid, limit=15)
+    game_info = info_for_steam_games()
+    return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
+
+#rick's meuk
+
 @app.route("/test_profile/<key>/<user_id>", methods = ['POST'])
 def test_profile(key, user_id):
     user_profile = user_by_id(key, user_id)

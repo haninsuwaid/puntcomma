@@ -124,11 +124,12 @@ def user(key, steamid):
 def user_by_id(key, steamid):
     """
         Functie beschrijving:
-
+            this function get the users id
         Parameters:
-
+            key: the key the user gets from steam to get their own api link
+            steamid: the steamid the user gets from using steam
         Return:
-
+            user's id
     """
     user_id = get_json_api(
         f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={steamid}",
