@@ -19,20 +19,20 @@ import framebuf
 
 # wifi settings
 # ssid = 'NothingRick'
-# password = 'Welkom01'
+# password = '**********'
 #
 
 
 # Wifi HBO LAB
 ssid = "hbo-ict-lab-2.4GHz"
-password = "hboictlab2018"
+password = "************"
 
 # IP Laptop LAB
 pc_ip = "http://192.168.3.174:5000"
 # HOME TESTING WIFI
-# ssid = 'BlackMirror'
+# ssid = '**********'
 
-# # password = 'Interstell@r2014'
+# # password = '*************'
 # pc_ip = "http://192.168.66.9:5000"
 
 
