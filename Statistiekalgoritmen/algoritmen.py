@@ -50,13 +50,15 @@ def kwantitatief_rapportcijfer_reviews(data):
 def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
     """
         functie beschrijving:
+            A function that calculates the coefficients using two lists: prijs and rating.
+            The dependent values are the ratings, and the independent values are the prices.
         parameters:
-            prijs:
-            rating:
-            num_interations:
-            learing_rate:
+            prijs: A list of prices of the top most played games.
+            rating: A list of rating from 0 to 10 of the most rated games.
+            num_interations: the amount of interations the function needs to find the coefficients
+            learing_rate: how much the coefficients should change everytime to find the coefficients
         return:
-            Dcoefficients
+            The coefficients
     """
     a = 0
     b = 0
@@ -69,7 +71,9 @@ def gradient_descent(prijs, rating, num_iterations=1000, learning_rate=0.0001):
     coefficients = [a, b]
     return coefficients
 
-
+"""
+    The data I want to give to the gradient_descent function
+"""
 data = laad_json_bestand()
 top_100_meest_gereviewde_games = kwantitatief_rapportcijfer_reviews(data)
 prijs = top_100_meest_gereviewde_games["price"].tolist()
@@ -83,11 +87,12 @@ a, b = coefficients
 def linear_regression(x):
     """
         functie beschrijving:
-
+            this function is a linear regression formula. It calculates the predicted value.
+            outside the function I give a and b values form the coefficients of the gradient_descent function
         parameters:
-            x:
+            x: the independent value the price in this case
         return:
-            som
+            linear regression formula
     """
     return a + b * x
 
@@ -95,7 +100,7 @@ def linear_regression(x):
 def linear_regression_price_rating():
     """
         functie beschrijving:
-
+            this fucntion makes a graph with data points, and the line of the linear_regression.
         return:
             De file_path waar de staafdiagram wordt opgeslagen.
     """
