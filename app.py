@@ -68,7 +68,7 @@ def home():
             the page path and the needed functions for that page
     """
     game_info = info_for_steam_games()
-    return render_template('home.html', eerste_game=eerste_game, game_info=game_info)
+    return render_template('home.html', game_info=game_info)
 
 
 @app.route('/game/<appid>')

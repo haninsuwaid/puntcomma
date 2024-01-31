@@ -20,7 +20,7 @@ def kwantitatief_rapportcijfer_reviews(data):
     data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
     data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
 
-    return sorteer_data(data, 'cijfer', False)
+    return data
 
 def plot_staafdiagram_rapportcijfers(data,key):
     """
