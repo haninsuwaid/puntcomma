@@ -1,4 +1,4 @@
-from flask import request, session, redirect, url_for, jsonify
+from flask import request, session, redirect, url_for, jsonify, render_template, Flask
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
 from basisfuncties.basisfuncties import *
@@ -74,7 +74,7 @@ def home():
 def game(appid):
     """
         Functie beschrijving:
-            a function that gets the appid of a chosen game and the fucntion steam_game_info uses the id
+            a function that gets the appid of a chosen game and the function steam_game_info uses the id
             to get the game data with the function.
         Parameters:
             appid: the id of a chosen game from the url
@@ -118,7 +118,6 @@ def owned_games():
     appid = request.args.get('appid')
     game_name = owned_games_info(key, steamid, limit=15)
     game_info = info_for_steam_games()
-<<<<<<< Updated upstream
     return render_template('owned_games.html', appid=appid, game_info=game_info, game_name=game_name)
 
 
@@ -133,7 +132,7 @@ def testdata():
 def test_games(key, user_id):
     user_profile = user_by_id(key, user_id)
     return jsonify(user_profile)
-=======
+
     game_info = info_for_steam_games()
     return render_template('home.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, prijsfrequentie=prijsfrequentie, chart_image=chart_image, game_info=game_info)
 
@@ -175,7 +174,6 @@ def test_games(key, user_id):
 def test_amount_of_games(key, user_id):
     amount_user_games = amount_owned_games(key, user_id)
     return jsonify(amount_user_games)
->>>>>>> Stashed changes
 
 
 if __name__ == '__main__':

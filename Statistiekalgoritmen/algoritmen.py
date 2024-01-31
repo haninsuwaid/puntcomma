@@ -6,11 +6,6 @@
 import pandas as pd
 import json
 import os
-from flask import Flask, render_template
-import numpy as np
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -193,7 +188,7 @@ def kwantitatief_frequentie_prijs():
         return: frequentie_prijs
     """
 
-    # Lodas the json file and put all the prices from the file in the var prijzen.
+    # Loads the json file and put all the prices from the file in the var prijzen.
     price_data = laad_json_bestand()
     prijzen = price_data['price']
 
