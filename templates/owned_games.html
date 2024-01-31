@@ -1,0 +1,10 @@
+{% include 'header.html' %}
+<main id="profile">
+   <div id="games_list">
+        <h1>Top played games:</h1>
+        {% for game in game_name %}
+       <a href="{{ url_for('game', appid=game['appid']) }}"><p>{{ game["game_info"]["gameName"] }}<br></p></a>
+        {% endfor %}
+   </div>
+</main>
+{% include 'footer.html' %}

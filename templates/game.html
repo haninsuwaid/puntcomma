@@ -1,0 +1,76 @@
+{% include 'header.html' %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<main id="body">
+
+    {% for appid, game_data in game.items() %}
+
+    <div class="game-card">
+        <div class="game-details">
+            <h2 class="game-title">{{ game_data['data']['name']}}</h2>
+            <img class="main-game-img" src="{{ game_data['data']['header_image'] }}">
+            <p class="slideshow-game-title">{{ game_data['data']['short_description'] }}</p>
+        <br>
+            <p class="slideshow-game-title">Release Date: {{ game_data['data']['release_date']['date'] }}</p>
+            <p class="slideshow-game-title">Required Age: {{ game_data['data']['required_age'] }}</p>
+            <p class="slideshow-game-title">Price:
+                {% if 'price_overview' in game_data['data'] %}
+                    {{ game_data['data']['price_overview']['final_formatted'] }}
+                {% else %}
+                 No price available
+                {% endif %}
+            </p>
+            <p class="slideshow-game-title">Genres:
+            {% for genre in game_data['data']['genres'] %}
+                    {{ genre['description'] }}
+            {% endfor %}
+            </p>
+            <p class="slideshow-game-title">Developer: {{ game_data['data']['developers'][0] }}</p>
+            <p class="slideshow-game-title">Publisher: {{ game_data['data']['publishers'][0] }}</p>
+        </div>
+    </div>
+
+    <div class="swiper">
+        <div class="swiper-wrapper">
+        {% for screenshot in game_data['data']['screenshots'] %}
+            <div class="swiper-slide">
+                <div class="card-contents">
+                    <img src="{{ screenshot['path_full'] }}" alt="screenshot game">
+                </div>
+            </div>
+        {% endfor %}
+
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    {% endfor %}
+
+</main>
+
+
+<script>
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 3,
+        centeredSlides: true,
+        direction: 'horizontal',
+        spaceBetween: '20',
+        loop: true,
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            1200: {
+                slidesPerView: 3,
+            },
+        }
+    });
+</script>
+ {% include 'footer.html' %}
