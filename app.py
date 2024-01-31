@@ -93,11 +93,15 @@ def stats():
         Return:
             returns the path of that page
     """
+    achievements_playtime = achievement_playtime()
+    frequentie_prijs = kwantitatief_frequentie_prijs()
+    frequentie_genres = kwalitatief_frequentie_genres()
+    linear_regression_price = linear_regression_price_rating()
+
     df = laad_json_bestand()
     results = onderzoek_data(df, 'cijfer')
-    eerste_game = laad_eerste_game(df)
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    return render_template('stats.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, results=results )
+    return render_template('stats.html', linear_regression_price=linear_regression_price, frequentie_genres=frequentie_genres, frequentie_prijs=frequentie_prijs, achievements_playtime=achievements_playtime, sorteer_data_data=sorteer_data_data, results=results )
 
 
 @app.route('/owned_games/')

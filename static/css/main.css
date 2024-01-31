@@ -254,6 +254,10 @@ footer a:hover{
     justify-content: space-around;
 }
 
+.data_onderzoek{
+    text-align: center;
+}
+
 #stats p{
     font-size: 0.8em;
     text-align: center;

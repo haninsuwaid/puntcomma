@@ -1,6 +1,7 @@
 import requests
 import random
 import asyncio
+from basisfuncties import *
 
 
 def get_api_key(data, keys):
@@ -170,11 +171,10 @@ def all_owned_games(key, steamid):
         "response", "games"
     )
     appids = []
-    sorted_games = sorted(games, key=lambda x: x.get("playtime_forever"))
-    for owned_games_data in sorted_games:
-        if owned_games_data["playtime_forever"] > 0:
-            appid = owned_games_data["appid"]
-            appids.append(appid)
+    df = (data_naar_pandas(games))
+    df_sorteer_games = sorteer_data(df,"playtime_forever", False)
+    for app_id in df_sorteer_games['appid']:
+        appids.append(app_id)
     return appids
 
 
@@ -217,12 +217,12 @@ def friends_steam_id(key, steamid):
         f"https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key={key}&steamid={steamid}&relationship=friend",
         "friendslist", "friends"
     )
-    friend_list_data = []
-    sorted_friends = sorted(friends, key=lambda x: x.get("friend_since"))
-    for friend in sorted_friends[:10]:
-        steam_id = friend["steamid"]
-        friend_list_data.append(steam_id)
-    return friend_list_data
+    steamid_oldst_friends = []
+    df = (data_naar_pandas(friends))
+    df_sorteer = sorteer_data(df, 'friend_since', True)
+    for steamid in df_sorteer['steamid']:
+        steamid_oldst_friends.append(steamid)
+    return steamid_oldst_friends
 
 
 def friends_list_info(key, steamid, limit=0):
