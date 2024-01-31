@@ -193,15 +193,15 @@ def onderzoek_data(df, key=None):
 
     q1, q2, q3 = kwartielen(df, key)
 
-    kolomnaam = f'Onderzoek wordt gedaan op kolom: {key}'
-    gemiddelde_kolom = f'Gemiddelde van de data is: {gemiddelde(df, key)}'
-    mediaan_kolom = f'Mediaan van de data is: {mediaan(df, key)}'
-    frequenties_kolom = f'Lijst met frequenties: {freq(df, key)}'
-    modi_kolom = f'Modi/modus van de data is: {modi(df, key)}'
-    standaarddeviatie_kolom = f'Standaarddeviatie van de data is: {standaarddeviatie_variantiecoëfficiënt(df, key)}'
-    range_kolom = f'Range van de data is: {range(df, key)}'
-    kwartielen_kolom = f'Kwartielen van de data zijn: Q1={q1}, Q2={q2}, Q3={q3}'
-    interkwartielafstand_kolom = f'Interkwartielafstand van de data is: {interkwartielafstand(q3, q1)}'
+    kolomnaam = f'Research is done on column: {key}'
+    gemiddelde_kolom = f'Average of the data is: {gemiddelde(df, key)}'
+    mediaan_kolom = f'Median of the data is: {mediaan(df, key)}'
+    frequenties_kolom = f'List of frequencies: {freq(df, key)}'
+    modi_kolom = f'Modes/mode of the data is: {modi(df, key)}'
+    standaarddeviatie_kolom = f'Standard deviation of the data is: {standaarddeviatie_variantiecoëfficiënt(df, key)}'
+    range_kolom = f'Range of the data is: {range(df, key)}'
+    kwartielen_kolom = f'Quartiles of the data are: Q1={q1}, Q2={q2}, Q3={q3}'
+    interkwartielafstand_kolom = f'Interquartile range of the data is: {interkwartielafstand(q3, q1)}'
 
     return kolomnaam, gemiddelde_kolom, mediaan_kolom, modi_kolom, standaarddeviatie_kolom, range_kolom, kwartielen_kolom, interkwartielafstand_kolom
 df = data_naar_pandas(json_path)
