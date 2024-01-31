@@ -1,6 +1,5 @@
-from basisfuncties import data_naar_pandas#functie
-from basisfuncties import json_path#bestand
-from onderzoek_data import freq#voor staafdiagram
+from basisfuncties.basisfuncties import data_naar_pandas#functie
+from basisfuncties.onderzoek_data import freq#voor staafdiagram
 import matplotlib.pyplot as plt
 import numpy as np
 import os

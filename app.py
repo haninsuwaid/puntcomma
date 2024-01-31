@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+from flask import request, session, redirect, url_for, jsonify
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
-from onderzoek_data import *
-from basisfuncties import data_naar_pandas#functie
-from basisfuncties import json_path#bestand
-from Statistiek_algoritmen.statistiek import plot_staafdiagram_rapportcijfers,plot_insight_ratings_per_game
+from basisfuncties.basisfuncties import *
+from basisfuncties.onderzoek_data import *
 from views import views
 
 

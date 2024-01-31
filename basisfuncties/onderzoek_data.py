@@ -1,6 +1,6 @@
-from basisfuncties import data_naar_pandas#functie
-from basisfuncties import json_path#bestand
-from basisfuncties import sorteer_data
+from basisfuncties.basisfuncties import data_naar_pandas#functie
+from basisfuncties.basisfuncties import json_path#bestand
+from basisfuncties.basisfuncties import sorteer_data
 
 #• • • • • • • • • • • • • • • • • • • • • • • •Centrummaten• • • • • • • • • • • • • • • • • • • • • • • • • • • • •#
 def gemiddelde(df, key):

@@ -98,10 +98,10 @@ def pandas_naar_json(df, filename):
     Bron:
         • https://datatofish.com/export-pandas-dataframe-json/
     """
-    json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','puntcomma', 'json', filename))
+    json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'puntcomma', 'json', filename))
     json_list = df.to_dict(orient='records') #(zie bron) zet panda dataframe om naar een lijst met dicts
     with open(f'{json_path}', 'x') as bestand:
         json.dump(json_list, bestand, indent=4)
 
 #• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • #
-json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'json', 'new_steam.json'))
+json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../json', 'new_steam.json'))
