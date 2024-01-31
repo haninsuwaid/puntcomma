@@ -3,7 +3,6 @@
     schrijven over wat de functie doet, waar de parameters voor gebruikt worden,
     en wat de functie uiteindelijk returnt. Alleen dus van Ai.
 """
-
 import pandas as pd
 import json
 import os
@@ -15,7 +14,17 @@ import base64
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def laad_json_bestand():
+    """
+        Functiebeschrijving:
+            Deze functie laadt JSON-gegevens uit een bestand of een lijst, en converteert deze naar een Pandas DataFrame.
+            Het bestand kan zowel een JSON-bestand als een lijst met JSON-objecten zijn.
+        Parameters:
+            Bestandsnaam: JSON-bestand of lijst.
+        Return:
+            Pandas Dataframe.
+    """
     json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'puntcomma', 'json', 'new_steam.json')
     with open(json_path) as bestand:
         data = json.load(bestand)
@@ -28,21 +37,21 @@ def laad_json_bestand():
     return df
 
 
-def laad_eerste_game(df):
-    data = df
-    return data.iloc[0, :]
-
-
-def sorteer_data(data, column, ascending_bool):
-    sorted_df = data.sort_values(by=(column), ascending=(ascending_bool))
-    return sorted_df
-
-
 def kwantitatief_rapportcijfer_reviews(data):
+    """
+        Functie beschrijving:
+            De functie berekend de waardering obv het totaal aantal gegeven negatieve en positieve beoordelingen
+            en wordt uitgedrukt op een schaal van 10. Het wordt ook gesorteerd op de top 200 meest beoordeelde games.
+        Parameters:
+            Data: Pandas Dataframe
+        Return:
+            Een bijgewerkte Pandas Dataframe, met toegevoegde kolommen per game voor het totaal gegeven beoordelingen en
+            de waarding.
+    """
     data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
     data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
     gesorteerde_data = data.sort_values(by='totaal_ratings', ascending=False)
-    top_100 = gesorteerde_data.head(100)
+    top_100 = gesorteerde_data.head(200)
 
     return top_100
 
@@ -105,18 +114,18 @@ def linear_regression_price_rating():
             De file_path waar de staafdiagram wordt opgeslagen.
     """
     plt.figure(facecolor='#1b2838')
-    plt.scatter(prijs, rating, color='blue', label='Data points')
-    plt.plot(prijs, linear_regression(np.array(prijs)), 'k', label='Linear Regression')
+    plt.scatter(prijs, rating, color='#354f52', label='Data points')
+    plt.plot(prijs, linear_regression(np.array(prijs)), 'red', label='Linear Regression')
     plt.yticks(color="white")
     plt.xticks(color="white")
     plt.ylabel('Rating', color='white')
     plt.xlabel('Price', color='white')
     plt.legend()
-    plt.show()
-    file_path = '..\static\images\linear_regression_price_rating.png'
+    file_path = 'static\images\linear_regression_price_rating.png'
     plt.savefig(file_path)
     plt.close()
     return file_path
+
 
 def kwalitatief_frequentie_genres():
     """
@@ -169,8 +178,7 @@ def kwalitatief_frequentie_genres():
     plt.ylabel('Rating', color='white')
     plt.xlabel('Price', color='white')
     plt.legend()
-    plt.show()
-    file_path = '..\static\images\linear_regression_price_rating.png'
+    file_path = 'static\images\linear_regression_price_rating.png'
     plt.savefig(file_path)
     plt.close()
     return file_path
@@ -226,6 +234,7 @@ def kwantitatief_frequentie_prijs():
     plt.close()
     return graph_filename
 
+
 def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     """
         function description:
@@ -273,18 +282,16 @@ def achievement_playtime(num_iterations=1000, learning_rate=0.00001):
     filtered_x = np.array(filtered_x)
     model_line = a + b * filtered_x
 
-    plt.figure(figsize=(10, 10),facecolor="#1b2838")
-    plt.scatter(filtered_x, filtered_y, color="#4093D5", label="Games")
-    plt.plot(filtered_x, model_line, color="#FF6347", label="Predicted playtime")
+    plt.figure(facecolor="#1b2838")
+    plt.scatter(filtered_x, filtered_y, color="#354f52", label="Games")
+    plt.plot(filtered_x, model_line, "red", label="Predicted playtime")
     plt.yticks(color="white")
     plt.xticks(color="white")
     plt.title('Prediction of the playtime based on achievements', color="white")
     plt.ylabel('Average Playtime', color="white")
     plt.xlabel('Achievements', color="white")
     plt.legend(loc="upper right")
-    ax = plt.gca()
-    ax.set_facecolor("#1b2838")
-    graph_filename = '..\static\images\linear_regression_achievements_playtime.png'
+    graph_filename = 'static\images\linear_regression_achievements_playtime.png'
     plt.savefig(graph_filename)
     plt.close()
     return a, b

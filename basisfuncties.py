@@ -56,6 +56,7 @@ def laad_eerste_game(df):
     data = df
     return data.iloc[0,:]
 
+
 def sorteer_data(df,column,ascending_bool,extra_column=None):
     """
     Functiebeschrijving:
