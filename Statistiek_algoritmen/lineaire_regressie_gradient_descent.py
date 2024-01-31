@@ -6,10 +6,12 @@ new_steam = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'json'
 
 data = data_naar_pandas(new_steam)
 data_gesorteerd = sorteer_data(data, 'average_playtime', False)
+filtered_data = data_gesorteerd.loc[data_gesorteerd['average_playtime'] < 70000]
 
-x = data_gesorteerd['cijfer']
-y = data_gesorteerd['price']
-
+# x = data_gesorteerd['cijfer']
+# y = data_gesorteerd['average_playtime'] < 125000]
+x = filtered_data['cijfer']
+y = filtered_data['average_playtime']
 def linear_regression_lsm(x, y):
     #https://www.youtube.com/watch?v=JvS2triCgOY
     x_gemiddelde = sum(x) / len(x)
@@ -30,9 +32,9 @@ def gradient_descent(x, y, num_iterations=1000, learning_rate=0.0001):
 
     for iteration in range(num_iterations):
         for xk, yk in zip(x, y):
-            error = (a + b * xk) - yk
-            a = a - error * learning_rate
-            b = b - xk * error * learning_rate
+                error = (a + b * xk) - yk
+                a = a - error * learning_rate
+                b = b - xk * error * learning_rate
 
     coefficients = [a, b]
     return coefficients
@@ -44,7 +46,7 @@ print(coefficients)
 coefficients_gradient = gradient_descent(x, y)
 print(coefficients_gradient)
 
-print(f'Met een voorspelling game cijfer 6.5 zal de prijs geschat zijn: {coefficients_gradient[0] +coefficients_gradient[1] * 8}')
+print(f'Met een voorspelling game cijfer 5 zal de "average playtime" geschat zijn: {coefficients_gradient[0] +coefficients_gradient[1] * 5}')
 
 plt.figure(facecolor='#1b2838')
 # Plot van de data en de lineaire regressie
@@ -55,7 +57,7 @@ plt.plot(x, coefficients_gradient[0] + coefficients_gradient[1] * x, alpha=0.8, 
 plt.yticks(color="white")
 plt.xticks(color="white")
 plt.xlabel('Cijfer', color='white')
-plt.ylabel('Prijs', color='white')
+plt.ylabel('Average playtime', color='white')
 plt.title("Lineaire regressie en gradient descent", color='white')
 plt.legend()
 plt.show()

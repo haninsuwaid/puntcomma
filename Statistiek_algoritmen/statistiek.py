@@ -1,5 +1,6 @@
 from basisfuncties import data_naar_pandas#functie
 from basisfuncties import json_path#bestand
+form basisfuncties import sorteer_data
 from onderzoek_data import freq#voor staafdiagram
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,7 +23,7 @@ def kwantitatief_rapportcijfer_pandas(data):
     data['totaal_ratings'] = data['positive_ratings'] + data['negative_ratings']
     data['cijfer'] = round((data['positive_ratings'] / data['totaal_ratings']) * 10, 1)
 
-    return sorteer_data(data, 'cijfer', False)
+    return data
 
 def plot_staafdiagram_rapportcijfers(data,key):
     """
@@ -110,7 +111,7 @@ def plot_inzicht_waardering_per_game(data, game_id):
 
     graph_ratings_game = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'images', f'graph_ratings_{game_id}.png'))
     plt.savefig(graph_ratings_game)
-    plt.show()
+    #plt.show()
     plt.close()
 
     return graph_ratings_game
