@@ -175,7 +175,7 @@ def interkwartielafstand(q3,q1):
     return q3-q1
 
 #• • • • • • • • • • • • • • • • • • • • • • • •Toepassing• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • #
-def onderzoek_data(df):
+def onderzoek_data(df, key=None):
     """
     Functiebeschrijving:
     De functie brengt alle centrum- en spreidinsmaten samen, en geeft vervolgens een overzicht van de resultaten.
@@ -186,16 +186,27 @@ def onderzoek_data(df):
     Return:
         De functie heeft geen explicitie return-waarde. De resultaten worden geprint.
     """
-    key = input(f'Voer de key in van de data die je wilt onderzoeken: ')
-    print(f'\nGemiddelde van de data is: {gemiddelde(df, key)}')
-    print(f'Mediaan van de data is: {mediaan(df, key)}')
-    print(f'Lijst met frequenties: {freq(df, key)}')
-    print(f'Modi/modus van de data is: {modi(df, key)}')
-    print(f'Standaarddeviatie van de data is: {standaarddeviatie_variantiecoëfficiënt(df, key)}')
-    print(f'Range van de data is: {range(df, key)}')
-    q1,q2,q3= kwartielen(df, key)
-    print(f'Kwartielen van de data zijn: Q1={q1}, Q2={q2}, Q3={q3}')
-    print(f'Interkwartielafstand van de data is: {interkwartielafstand(q3, q1)}')
+    if key == None:
+        key = input(f'Voer de key in van de data die je wilt onderzoeken: ')
+    else:
+        key == key
 
+    q1, q2, q3 = kwartielen(df, key)
+
+    kolomnaam = f'Onderzoek wordt gedaan op kolom: {key}'
+    gemiddelde_kolom = f'Gemiddelde van de data is: {gemiddelde(df, key)}'
+    mediaan_kolom = f'Mediaan van de data is: {mediaan(df, key)}'
+    frequenties_kolom = f'Lijst met frequenties: {freq(df, key)}'
+    modi_kolom = f'Modi/modus van de data is: {modi(df, key)}'
+    standaarddeviatie_kolom = f'Standaarddeviatie van de data is: {standaarddeviatie_variantiecoëfficiënt(df, key)}'
+    range_kolom = f'Range van de data is: {range(df, key)}'
+    kwartielen_kolom = f'Kwartielen van de data zijn: Q1={q1}, Q2={q2}, Q3={q3}'
+    interkwartielafstand_kolom = f'Interkwartielafstand van de data is: {interkwartielafstand(q3, q1)}'
+
+    return kolomnaam, gemiddelde_kolom, mediaan_kolom, modi_kolom, standaarddeviatie_kolom, range_kolom, kwartielen_kolom, interkwartielafstand_kolom
 df = data_naar_pandas(json_path)
-#onderzoek_data(df)
+onderzoek_data(df, 'cijfer')
+
+
+
+# onderzoek_data(df)

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from Statistiekalgoritmen.algoritmen import *
 from Statistiekalgoritmen.apiJson import *
+from onderzoek_data import *
 from basisfuncties import data_naar_pandas#functie
 from basisfuncties import json_path#bestand
 from Statistiek_algoritmen.statistiek import plot_staafdiagram_rapportcijfers,plot_insight_ratings_per_game
@@ -95,9 +96,10 @@ def stats():
             returns the path of that page
     """
     df = laad_json_bestand()
+    results = onderzoek_data(df, 'cijfer')
     eerste_game = laad_eerste_game(df)
     sorteer_data_data = sorteer_data(df, 'negative_ratings', True)
-    return render_template('stats.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data )
+    return render_template('stats.html', eerste_game=eerste_game, sorteer_data_data=sorteer_data_data, results=results )
 
 
 @app.route('/owned_games/')

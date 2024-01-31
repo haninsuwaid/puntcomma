@@ -2,6 +2,22 @@
 <h1 class="stats_text">Diagrams</h1>
 <main id="stats">
     <div>
+        <!--    <h2> De eerste game </h2>-->
+<!--    <div>-->
+<!--        <p><strong>Naam:</strong> {{ eerste_game['name'] }} <br></p>-->
+<!--        <p><strong>Prijs:</strong> &euro; {{ eerste_game['price'] }}<br></p>-->
+<!--        <p><strong>Genres:</strong> {{ eerste_game['genres'] }}</p>-->
+<!--    </div>-->
+        <p>
+            {% if results %}
+        <h2>Results:</h2>
+        {% for result in results %}
+            <p>{{ result }}</p>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+    <div>
         <img src="../static/images/graph_price.png" alt="Graph for price categories">
         <p>With this bar chart, you can see how many games fall into each price category.</p>
     </div>
