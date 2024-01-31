@@ -174,6 +174,7 @@ def interkwartielafstand(q3,q1):
     """
     return q3-q1
 
+
 #• • • • • • • • • • • • • • • • • • • • • • • •Toepassing• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • #
 def onderzoek_data(df, key=None):
     """
@@ -206,7 +207,5 @@ def onderzoek_data(df, key=None):
     return kolomnaam, gemiddelde_kolom, mediaan_kolom, modi_kolom, standaarddeviatie_kolom, range_kolom, kwartielen_kolom, interkwartielafstand_kolom
 df = data_naar_pandas(json_path)
 onderzoek_data(df, 'cijfer')
-
-
 
 # onderzoek_data(df)
