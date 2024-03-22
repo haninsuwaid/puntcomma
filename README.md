@@ -11,7 +11,7 @@ Om toegang te krijgen tot de webpagina, doorloop de volgende stappen:
 
 Naam: Hanin Suwaid Studentennummer: 1858616
 
-Naam: Olivier Oostermann Studentennummer: 1858861
+Naam:  Olivier Oostermann Studentennummer: 1858861
 
 Naam: Esra Cicek studentennummer: 1857104
 
